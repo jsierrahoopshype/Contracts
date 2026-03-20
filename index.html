@@ -4,30 +4,31 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NBA Contract Database</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
+  ::-webkit-scrollbar{height:6px;width:6px}::-webkit-scrollbar-track{background:#0d0d12}::-webkit-scrollbar-thumb{background:#333;border-radius:3px}
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); min-height: 100vh; color: white; overflow-x: auto; }
+  body { font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif; background: #0d0d12; min-height: 100vh; color: white; overflow-x: auto; }
   .container { max-width: 100%; margin: 0 auto; padding: 0.75rem 1rem; }
 
   header { text-align: center; padding: 1.25rem 0 0.75rem; }
-  header h1 { font-size: 2rem; font-weight: 800; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-  .subtitle { color: #8892b0; font-size: 0.9rem; margin-top: 0.2rem; }
-  .subtitle a { color: #667eea; text-decoration: none; }
+  header h1 { font-size: 2rem; font-weight: 800; font-family: 'Oswald', sans-serif; letter-spacing: 4px; text-transform: uppercase; background: linear-gradient(90deg, #ff4444, #ffaa00); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .subtitle { color: #555; font-size: 0.9rem; margin-top: 0.2rem; }
+  .subtitle a { color: #ffaa00; text-decoration: none; }
 
   /* Controls bar */
-  .controls { display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; margin-bottom: 0.75rem; padding: 0.6rem 0.75rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; }
-  .search-box { flex: 1; min-width: 180px; padding: 0.45rem 0.75rem; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 6px; color: white; font-family: 'DM Sans', sans-serif; font-size: 0.85rem; outline: none; }
-  .search-box::placeholder { color: #8892b0; }
-  .search-box:focus { border-color: #667eea; background: rgba(255,255,255,0.12); }
-  .filter-select { padding: 0.45rem 0.6rem; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 6px; color: white; font-family: 'DM Sans', sans-serif; font-size: 0.8rem; cursor: pointer; outline: none; }
-  .filter-select option { background: #1a1a2e; color: white; }
-  .filter-select:focus { border-color: #667eea; }
-  .result-count { color: #8892b0; font-size: 0.75rem; margin-left: auto; white-space: nowrap; }
+  .controls { display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; margin-bottom: 0.75rem; padding: 0.6rem 0.75rem; background: #12121a; border: 1px solid #222; border-radius: 10px; }
+  .search-box { flex: 1; min-width: 180px; padding: 0.45rem 0.75rem; background: #1a1a22; border: 1px solid #333; border-radius: 6px; color: white; font-family: 'DM Sans', sans-serif; font-size: 0.85rem; outline: none; }
+  .search-box::placeholder { color: #555; }
+  .search-box:focus { border-color: #ff4444; background: #1a1a22; }
+  .filter-select { padding: 0.45rem 0.6rem; background: #1a1a22; border: 1px solid #333; border-radius: 6px; color: white; font-family: 'DM Sans', sans-serif; font-size: 0.8rem; cursor: pointer; outline: none; }
+  .filter-select option { background: #0d0d12; color: white; }
+  .filter-select:focus { border-color: #ff4444; }
+  .result-count { color: #555; font-size: 0.75rem; margin-left: auto; white-space: nowrap; }
 
   /* Loading */
-  .loading { text-align: center; padding: 3rem; color: #8892b0; }
-  .loading-spinner { width: 48px; height: 48px; border: 4px solid rgba(255,255,255,0.15); border-top-color: #667eea; border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 1rem; }
+  .loading { text-align: center; padding: 3rem; color: #555; }
+  .loading-spinner { width: 48px; height: 48px; border: 4px solid rgba(255,255,255,0.15); border-top-color: #ff4444; border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 1rem; }
   @keyframes spin { to { transform: rotate(360deg); } }
   .error { text-align: center; padding: 2rem; color: #f87171; }
 
@@ -35,10 +36,10 @@
   .table-wrap { background: rgba(255,255,255,0.95); border-radius: 12px; overflow: visible; box-shadow: 0 4px 24px rgba(0,0,0,0.3); }
 
   /* Table */
-  table { border-collapse: collapse; color: #1a1a2e; font-size: 0.75rem; min-width: 2200px; }
+  table { border-collapse: collapse; color: #e0e0e0; font-size: 0.75rem; min-width: 2060px; }
   thead { position: sticky; top: 0; z-index: 20; }
-  th { background: #1a1a2e; color: white; padding: 0.5rem 0.4rem; font-weight: 700; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.3px; white-space: nowrap; text-align: center; border-bottom: 3px solid #667eea; cursor: pointer; user-select: none; transition: background 0.15s; }
-  th:hover { background: #2a2a5e; }
+  th { background: #0d0d12; color: white; padding: 0.5rem 0.4rem; font-weight: 700; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.3px; white-space: nowrap; text-align: center; border-bottom: 3px solid #ff4444; cursor: pointer; user-select: none; transition: background 0.15s; }
+  th:hover { background: rgba(255,68,68,0.15); }
   th.sorted-asc::after { content: ' ▲'; font-size: 0.55rem; }
   th.sorted-desc::after { content: ' ▼'; font-size: 0.55rem; }
   th.col-player { text-align: left; min-width: 150px; position: sticky; left: 0; z-index: 25; }
@@ -47,19 +48,19 @@
   th.yr-current { background: #2a2a5e; }
   th.meta-col { background: #1e2d3d; }
 
-  td { padding: 0.35rem 0.4rem; text-align: center; border-bottom: 1px solid #eef0f6; vertical-align: middle; white-space: nowrap; }
-  tr:hover td { background: #f0f1ff !important; }
+  td { padding: 0.35rem 0.4rem; text-align: center; border-bottom: 1px solid #1a1a2a; vertical-align: middle; white-space: nowrap; }
+  tr:hover td { background: #1a1a2a !important; }
 
   /* Sticky column backgrounds */
   td.col-player, td.col-team { position: sticky; z-index: 5; }
   td.col-player { left: 0; }
   td.col-team { left: 150px; }
-  tr:nth-child(odd) td { background: #fff; }
-  tr:nth-child(even) td { background: #f8f9ff; }
+  tr:nth-child(odd) td { background: #0d0d12; }
+  tr:nth-child(even) td { background: #14141e; }
 
   /* Player cell */
   .pc { display: flex; align-items: center; gap: 0.4rem; }
-  .pc-hs { width: 30px; height: 22px; border-radius: 3px; background: linear-gradient(135deg, #667eea, #764ba2); overflow: hidden; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+  .pc-hs { width: 30px; height: 22px; border-radius: 3px; background: linear-gradient(135deg, #ff4444, #ffaa00); overflow: hidden; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
   .pc-hs img { width: 100%; height: 100%; object-fit: cover; }
   .pc-hs .ini { color: white; font-weight: 700; font-size: 0.5rem; }
   .pc-nm { font-weight: 700; font-size: 0.8rem; }
@@ -71,24 +72,24 @@
 
   /* Salary cells */
   .sc { display: inline-block; border-radius: 3px; padding: 0.15rem 0.3rem; font-weight: 600; font-size: 0.7rem; min-width: 62px; text-align: right; }
-  .sc.g { background: #e8f5e9; color: #2e7d32; }
-  .sc.pg { background: #fff8e1; color: #f57f17; background-image: repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(245,127,23,0.06) 2px, rgba(245,127,23,0.06) 4px); }
-  .sc.ng { background: #fce4ec; color: #c62828; border: 1px dashed #ef9a9a; }
-  .sc.to { background: #e3f2fd; color: #1565c0; }
-  .sc.po { background: #f3e5f5; color: #7b1fa2; }
-  .sc.tw { background: #e0e0e0; color: #616161; font-size: 0.6rem; }
-  .sc.td { background: #fff3e0; color: #e65100; font-size: 0.6rem; }
+  .sc.g { background: rgba(46,125,50,0.15); color: #4caf50; }
+  .sc.pg { background: rgba(245,127,23,0.15); color: #ffaa00; }
+  .sc.ng { background: rgba(198,40,40,0.15); color: #ff4444; border: 1px dashed rgba(255,68,68,0.3); }
+  .sc.to { background: rgba(21,101,192,0.15); color: #64b5f6; }
+  .sc.po { background: rgba(123,31,162,0.15); color: #ce93d8; }
+  .sc.tw { background: rgba(97,97,97,0.15); color: #888; font-size: 0.6rem; }
+  .sc.td { background: rgba(230,81,0,0.15); color: #ffaa00; font-size: 0.6rem; }
   .empty { color: #d0d0d0; }
   .guar-line { display: block; font-size: 0.55rem; margin-top: 2px; font-weight: 600; white-space: nowrap; }
   .guar-line.partial { color: #f57f17; }
   .guar-line.non-g { color: #c62828; }
   .guar-line.po { color: #7b1fa2; }
   .guar-line.to { color: #1565c0; }
-  .end-ch { display: block; font-size: 0.55rem; color: #667eea; font-weight: 600; margin-top: 2px; white-space: nowrap; }
+  .end-ch { display: block; font-size: 0.55rem; color: #ff4444; font-weight: 600; margin-top: 2px; white-space: nowrap; }
 
   /* End column scenario cells */
   .end-scenarios { display: flex; gap: 3px; align-items: flex-start; justify-content: flex-start; }
-  .end-scenario { padding: 2px 5px; border-radius: 3px; border: 1px solid #333; background: #1a1a2e; text-align: center; min-width: 38px; }
+  .end-scenario { padding: 2px 5px; border-radius: 3px; border: 1px solid #333; background: #0d0d12; text-align: center; min-width: 38px; }
   .end-scenario.sc-first { border-color: #c62828; background: rgba(198,40,40,0.08); }
   .end-scenario.sc-last { border-color: #2e7d32; background: rgba(46,125,50,0.08); }
   .end-scenario.sc-mid { border-color: #f57f17; background: rgba(245,127,23,0.08); }
@@ -98,33 +99,33 @@
 
   /* Tags */
   .tag { display: inline-block; padding: 0.1rem 0.35rem; border-radius: 3px; font-size: 0.6rem; font-weight: 600; max-width: 140px; overflow: hidden; text-overflow: ellipsis; }
-  .tag-exc { background: #e8eaf6; color: #3949ab; }
-  .tag-type { background: #f3e5f5; color: #7b1fa2; }
-  .tag-opt-to { background: #e3f2fd; color: #1565c0; }
-  .tag-opt-po { background: #f3e5f5; color: #7b1fa2; }
-  .tag-tk { background: #fff3e0; color: #e65100; }
-  .tag-lb { background: #e8f5e9; color: #2e7d32; }
-  .tag-ub { background: #fce4ec; color: #c62828; }
-  .trade-ntc { background: #ffcdd2; color: #b71c1c; font-weight: 700; }
-  .trade-restricted { background: #fff3e0; color: #e65100; font-size: 0.6rem; }
-  .trade-expiring { background: #e0e0e0; color: #616161; }
-  .tag-dv { background: #fff8e1; color: #f57f17; font-weight: 700; font-size: 0.65rem; margin-left: 4px; }
-  .tag-ext-elig { background: #e8f5e9; color: #2e7d32; }
-  .tag-ext-date { background: #e3f2fd; color: #1565c0; }
-  .tag-ext-inelig { background: #fce4ec; color: #c62828; }
-  .tag-ext-rookie { background: #f3e5f5; color: #7b1fa2; }
-  .tag-ext-done { background: #e0e0e0; color: #616161; }
+  .tag-exc { background: rgba(57,73,171,0.15); color: #7986cb; }
+  .tag-type { background: rgba(123,31,162,0.15); color: #ce93d8; }
+  .tag-opt-to { background: rgba(21,101,192,0.15); color: #64b5f6; }
+  .tag-opt-po { background: rgba(123,31,162,0.15); color: #ce93d8; }
+  .tag-tk { background: rgba(230,81,0,0.15); color: #ffaa00; }
+  .tag-lb { background: rgba(46,125,50,0.15); color: #4caf50; }
+  .tag-ub { background: rgba(198,40,40,0.15); color: #ff4444; }
+  .trade-ntc { background: rgba(183,28,28,0.2); color: #ff4444; font-weight: 700; }
+  .trade-restricted { background: rgba(230,81,0,0.15); color: #ffaa00; font-size: 0.6rem; }
+  .trade-expiring { background: rgba(97,97,97,0.15); color: #888; }
+  .tag-dv { background: rgba(245,127,23,0.15); color: #ffaa00; font-weight: 700; font-size: 0.65rem; margin-left: 4px; }
+  .tag-ext-elig { background: rgba(46,125,50,0.15); color: #4caf50; }
+  .tag-ext-date { background: rgba(21,101,192,0.15); color: #64b5f6; }
+  .tag-ext-inelig { background: rgba(198,40,40,0.15); color: #ff4444; }
+  .tag-ext-rookie { background: rgba(123,31,162,0.15); color: #ce93d8; }
+  .tag-ext-done { background: rgba(97,97,97,0.15); color: #888; }
   .tag-ext-na { background: transparent; color: #bbb; }
   .ext-note { font-size: 0.55rem; color: #999; display: block; margin-top: 1px; }
   td.meta-val { font-size: 0.7rem; color: #5c6370; }
 
   /* Legend */
   .legend { display: flex; flex-wrap: wrap; gap: 0.4rem 0.75rem; margin-bottom: 0.5rem; padding: 0.4rem 0.75rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; }
-  .legend-item { display: flex; align-items: center; gap: 0.25rem; font-size: 0.7rem; color: #c0c8e0; }
+  .legend-item { display: flex; align-items: center; gap: 0.25rem; font-size: 0.7rem; color: #888; }
   .legend-sw { width: 12px; height: 12px; border-radius: 2px; flex-shrink: 0; }
 
-  footer { text-align: center; margin-top: 1.5rem; padding: 0.75rem; color: #8892b0; font-size: 0.8rem; }
-  footer a { color: #667eea; text-decoration: none; }
+  footer { text-align: center; margin-top: 1.5rem; padding: 0.75rem; color: #666; font-size: 0.8rem; }
+  footer a { color: #ff4444; text-decoration: none; }
 </style>
 </head>
 <body>
@@ -181,14 +182,14 @@
   </div>
 
   <div class="legend" id="legend" style="display:none;">
-    <div class="legend-item"><div class="legend-sw" style="background:#e8f5e9;border:1px solid #a5d6a7;"></div>Guaranteed</div>
-    <div class="legend-item"><div class="legend-sw" style="background:repeating-linear-gradient(45deg,#fff8e1,#fff8e1 2px,#fff0b3 2px,#fff0b3 4px);border:1px solid #ffe082;"></div>Partial G</div>
-    <div class="legend-item"><div class="legend-sw" style="background:#fce4ec;border:1px dashed #ef9a9a;"></div>Non-G</div>
-    <div class="legend-item"><div class="legend-sw" style="background:#e3f2fd;border:1px solid #90caf9;"></div>Team Opt</div>
-    <div class="legend-item"><div class="legend-sw" style="background:#f3e5f5;border:1px solid #ce93d8;"></div>Player Opt</div>
-    <div class="legend-item"><div class="legend-sw" style="background:#e0e0e0;border:1px solid #bdbdbd;"></div>Two-Way</div>
-    <div class="legend-item"><div class="legend-sw" style="background:#fff3e0;border:1px solid #ffcc80;"></div>10-Day</div>
-    <div class="legend-item" style="margin-left:auto;color:#8892b0;font-size:0.65rem;">Dotted underline = cap hold differs (hover for value)</div>
+    <div class="legend-item"><div class="legend-sw" style="background:rgba(46,125,50,0.3);border:1px solid rgba(76,175,80,0.5);"></div>Guaranteed</div>
+    <div class="legend-item"><div class="legend-sw" style="background:rgba(245,127,23,0.3);border:1px solid rgba(255,170,0,0.5);"></div>Partial G</div>
+    <div class="legend-item"><div class="legend-sw" style="background:rgba(198,40,40,0.3);border:1px dashed rgba(255,68,68,0.5);"></div>Non-G</div>
+    <div class="legend-item"><div class="legend-sw" style="background:rgba(21,101,192,0.3);border:1px solid rgba(100,181,246,0.5);"></div>Team Opt</div>
+    <div class="legend-item"><div class="legend-sw" style="background:rgba(123,31,162,0.3);border:1px solid rgba(206,147,216,0.5);"></div>Player Opt</div>
+    <div class="legend-item"><div class="legend-sw" style="background:rgba(97,97,97,0.3);border:1px solid rgba(136,136,136,0.5);"></div>Two-Way</div>
+    <div class="legend-item"><div class="legend-sw" style="background:rgba(230,81,0,0.3);border:1px solid rgba(255,170,0,0.5);"></div>10-Day</div>
+    <div class="legend-item" style="margin-left:auto;color:#666;font-size:0.65rem;">Dotted underline = cap hold differs (hover for value)</div>
   </div>
 
   <div id="loading" class="loading"><div class="loading-spinner"></div><p>Loading contract data...</p></div>
@@ -769,7 +770,7 @@ async function loadStarterCriteria() {
   // Try relative path first (same repo), then absolute URL
   const urls = [
     './sc_data.json',
-    'https://aderoa.github.io/Contracts/sc_data.json',  // Update with your actual repo URL
+    'https://jsierrahoopshype.github.io/Contracts/sc_data.json',  // Update with your actual repo URL
   ];
   let scJson = null;
   for (const url of urls) {
@@ -818,7 +819,7 @@ async function loadStarterCriteria() {
 async function loadTenureData() {
   const urls = [
     './tenure_data.json',
-    'https://aderoa.github.io/Contracts/tenure_data.json',
+    'https://jsierrahoopshype.github.io/Contracts/tenure_data.json',
   ];
   let tenureJson = null;
   for (const url of urls) {
@@ -1153,7 +1154,6 @@ function renderTable() {
   html += thS('Option', 'option', 'meta-col');
   html += thS('Total G', 'totG', 'meta-col');
   html += thS('Exception', 'exc', 'meta-col');
-  html += thS('Type / Notes', 'notes', 'meta-col');
   html += thS('Signed', 'sigDate', 'meta-col');
   html += thS('Sign. Team', 'sigTeam', 'meta-col');
   html += thS('Since', 'tenure', 'meta-col');
@@ -1246,10 +1246,6 @@ function renderTable() {
 
     // Exception
     html += `<td>${p.exc ? `<span class="tag tag-exc" title="${p.exc}">${shortExc(p.exc)}</span>` : ''}</td>`;
-
-    // Notes
-    const cn = cleanNotes(p.notes);
-    html += `<td>${cn ? `<span class="tag tag-type" title="${cn}">${shortNotes(p.notes)}</span>` : ''}</td>`;
 
     // Signing date
     html += `<td class="meta-val">${p.sigDate || ''}</td>`;
