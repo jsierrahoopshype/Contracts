@@ -232,12 +232,10 @@
 </div>
 
 <script>
-const SHEET_ID = '2PACX-1vSg6im6IYB6HXMGzQbmmBnLw9SfQLzxCSo8OfChxlJLhsB6BBCO0wPF_TMch0YgAbtFqYkwDWrsxRe7';
-const CONTRACT_GID = '1649473047';
-const DRAFT_GID = '1889032294';
-const CSV_URL = `https://docs.google.com/spreadsheets/d/e/${SHEET_ID}/pub?gid=${CONTRACT_GID}&single=true&output=csv`;
-const ROSTER_CSV_URL = `https://docs.google.com/spreadsheets/d/e/${SHEET_ID}/pub?gid=0&single=true&output=csv`;
-const DRAFT_CSV_URL = `https://docs.google.com/spreadsheets/d/e/${SHEET_ID}/pub?gid=${DRAFT_GID}&single=true&output=csv`;
+const API_BASE = 'https://hoopsmatic.com';
+const CSV_URL = `${API_BASE}/api/contracts`;
+const ROSTER_CSV_URL = `${API_BASE}/api/roster`;
+const DRAFT_CSV_URL = `${API_BASE}/api/draft`;
 
 const TEAM_IDS = {
   'Atlanta':1610612737,'Boston':1610612738,'Brooklyn':1610612751,
