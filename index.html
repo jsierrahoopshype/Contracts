@@ -975,15 +975,23 @@ async function loadTenureData() {
 
 async function loadStats() {
   try {
-    console.log('[Stats] Fetching from', `${API_BASE}/api/stats`);
-    const ctrl = new AbortController();
-    const timer = setTimeout(() => ctrl.abort(), 8000);
-    const resp = await fetch(`${API_BASE}/api/stats`, { signal: ctrl.signal });
-    clearTimeout(timer);
-    console.log('[Stats] Response:', resp.status, resp.statusText);
-    if (!resp.ok) { console.warn('Stats: HTTP', resp.status); return; }
-    const data = await resp.json();
-    console.log('[Stats] Received', data.length, 'players');
+    let data;
+    // Use server-injected stats if available
+    if (window.__STATS_JSON__) {
+      data = window.__STATS_JSON__;
+      delete window.__STATS_JSON__;
+      console.log('[Stats] Using injected data:', data.length, 'players');
+    } else {
+      console.log('[Stats] Fetching from', `${API_BASE}/api/stats`);
+      const ctrl = new AbortController();
+      const timer = setTimeout(() => ctrl.abort(), 8000);
+      const resp = await fetch(`${API_BASE}/api/stats`, { signal: ctrl.signal });
+      clearTimeout(timer);
+      console.log('[Stats] Response:', resp.status, resp.statusText);
+      if (!resp.ok) { console.warn('[Stats] HTTP', resp.status); return; }
+      data = await resp.json();
+      console.log('[Stats] Received', data.length, 'players');
+    }
     const norm = s => s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\./g,'').replace(/\s+/g,' ').trim().toLowerCase()
       .replace(/\s+(jr|sr|ii|iii|iv|v)$/,'');
     const statsByNorm = {};
@@ -1777,7 +1785,7 @@ function checkHashPlayer() {
 
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closePlayer(); });
 
-console.log('%c[HoopsMatic Contracts v2.3]', 'color:#3b82f6;font-weight:bold');
+console.log('%c[HoopsMatic Contracts v2.4]', 'color:#3b82f6;font-weight:bold');
 loadData();
 </script>
 </body>
