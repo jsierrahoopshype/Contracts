@@ -165,6 +165,35 @@
     .header-inner { flex-wrap: wrap; }
     .header-sub { width: 100%; font-size: .7rem; }
   }
+
+  /* Player Detail Page */
+  .pp-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.4);z-index:10000;display:none;overflow-y:auto;-webkit-overflow-scrolling:touch;}
+  .pp-overlay.open{display:flex;justify-content:center;padding:2rem 1rem;}
+  .pp-card{background:var(--surface);border-radius:12px;max-width:720px;width:100%;border:1px solid var(--border);position:relative;align-self:flex-start;animation:ppIn .2s ease;}
+  @keyframes ppIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+  .pp-close{position:absolute;top:.75rem;right:.75rem;background:none;border:none;font-size:1.2rem;cursor:pointer;color:var(--text-muted);line-height:1;padding:.25rem;}
+  .pp-close:hover{color:var(--text);}
+  .pp-hdr{display:flex;align-items:center;gap:1rem;padding:1.25rem 1.25rem .75rem;}
+  .pp-hs{width:64px;height:48px;border-radius:6px;background:#f0f1f3;overflow:hidden;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .pp-hs img{width:100%;height:100%;object-fit:cover;}
+  .pp-hs .ini{font-size:1rem;font-weight:700;color:var(--text-muted);}
+  .pp-name{font-size:1.25rem;font-weight:800;color:var(--text);letter-spacing:-.02em;}
+  .pp-team{display:flex;align-items:center;gap:.35rem;font-size:.8rem;color:var(--text-secondary);margin-top:.1rem;}
+  .pp-team img{width:18px;height:18px;}
+  .pp-badges{display:flex;flex-wrap:wrap;gap:.3rem;margin-top:.3rem;}
+  .pp-badge{font-size:.6rem;font-weight:600;padding:.15rem .4rem;border-radius:4px;}
+  .pp-section{padding:.75rem 1.25rem;border-top:1px solid var(--border-light);}
+  .pp-section-title{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:var(--text-muted);margin-bottom:.5rem;}
+  .pp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:.5rem;}
+  .pp-field{font-size:.75rem;}
+  .pp-field-label{font-size:.6rem;color:var(--text-muted);font-weight:600;text-transform:uppercase;letter-spacing:.3px;}
+  .pp-field-value{font-weight:600;color:var(--text);margin-top:.1rem;}
+  .pp-sal-table{width:100%;border-collapse:collapse;font-size:.75rem;}
+  .pp-sal-table th{background:var(--bg);font-size:.6rem;text-transform:uppercase;letter-spacing:.3px;padding:.35rem .5rem;text-align:center;font-weight:600;color:var(--text-secondary);border-bottom:1px solid var(--border);}
+  .pp-sal-table td{padding:.35rem .5rem;text-align:center;border-bottom:1px solid var(--border-light);}
+  .pp-link{color:var(--accent);cursor:pointer;text-decoration:none;}
+  .pp-link:hover{text-decoration:underline;}
+  @media(max-width:600px){.pp-overlay.open{padding:.5rem;}.pp-hdr{flex-direction:column;align-items:flex-start;gap:.5rem;}.pp-grid{grid-template-columns:1fr 1fr;}}
 </style>
 </head>
 <body>
@@ -238,7 +267,9 @@
   <div id="tableArea" style="display:none;"></div>
   <div id="error" class="error" style="display:none;"></div>
 
-  <footer>Data compiled by <a href="https://hoopsmatic.com" target="_blank">HoopsMatic</a> · <a href="https://jsierrahoopshype.github.io/DepthCharts/" target="_blank">Depth Charts</a> · <a href="https://jsierrahoopshype.github.io/Injuries/" target="_blank">Injury Report</a></footer>
+  <div id="playerOverlay" class="pp-overlay" onclick="if(event.target===this)closePlayer()"></div>
+
+  <footer>Data compiled by <a href="https://hoopsmatic.com" target="_blank">HoopsMatic</a> · <a href="https://hoopsmatic.com" target="_blank">Trade Machine</a></footer>
 </div>
 
 <script>
@@ -1107,6 +1138,7 @@ async function loadData() {
     document.getElementById('legend').style.display = 'flex';
     document.getElementById('tableArea').style.display = 'block';
     applyFilters();
+    checkHashPlayer();
 
     // Fire-and-forget: load starter criteria and tenure data in background, re-render when done
     Promise.all([
@@ -1223,7 +1255,7 @@ function renderTable() {
     const hsH = hs
       ? `<div class="pc-hs"><img src="${hs}" onerror="this.parentElement.innerHTML='<span class=\\'ini\\'>${ini(p.name)}</span>'"></div>`
       : `<div class="pc-hs"><span class="ini">${ini(p.name)}</span></div>`;
-    html += `<td class="col-player"><div class="pc">${hsH}<span class="pc-nm">${p.name}</span></div></td>`;
+    html += `<td class="col-player"><div class="pc">${hsH}<a class="pc-nm pp-link" onclick="showPlayer('${p.name.replace(/'/g,"\\'")}')">${p.name}</a></div></td>`;
 
     // Team
     html += `<td class="col-team"><div class="tm"><img src="${teamLogo(p.team)}" alt=""><span>${p.team}</span></div></td>`;
@@ -1463,6 +1495,183 @@ document.getElementById('filterStatus').addEventListener('change', applyFilters)
 document.getElementById('filterException').addEventListener('change', applyFilters);
 document.getElementById('filterEnd').addEventListener('change', applyFilters);
 document.getElementById('filterExt').addEventListener('change', applyFilters);
+
+// =====================================================
+// PLAYER DETAIL PAGE
+// =====================================================
+function showPlayer(name) {
+  const p = allPlayers.find(pl => pl.name === name);
+  if (!p) return;
+  location.hash = encodeURIComponent(name);
+  const overlay = document.getElementById('playerOverlay');
+  overlay.innerHTML = renderPlayerPage(p);
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closePlayer() {
+  const overlay = document.getElementById('playerOverlay');
+  overlay.classList.remove('open');
+  overlay.innerHTML = '';
+  document.body.style.overflow = '';
+  history.replaceState(null, '', location.pathname + location.search);
+}
+
+function renderPlayerPage(p) {
+  const hs = headshots[p.name];
+  const hsH = hs
+    ? `<img src="${hs}" onerror="this.parentElement.innerHTML='<span class=ini>${ini(p.name)}</span>'">`
+    : `<span class="ini">${ini(p.name)}</span>`;
+  const logo = teamLogo(p.team);
+
+  let h = `<div class="pp-card">`;
+  h += `<button class="pp-close" onclick="closePlayer()">✕</button>`;
+
+  // Header: headshot, name, team
+  h += `<div class="pp-hdr">`;
+  h += `<div class="pp-hs">${hsH}</div>`;
+  h += `<div>`;
+  h += `<div class="pp-name">${p.name}</div>`;
+  h += `<div class="pp-team">${logo ? `<img src="${logo}">` : ''}${p.team || 'Free Agent'}</div>`;
+  // Badges
+  h += `<div class="pp-badges">`;
+  if (p.exc) h += `<span class="pp-badge tag-exc">${shortExc(p.exc)}</span>`;
+  if (p.notes) h += `<span class="pp-badge tag-type">${shortNotes(p.notes)}</span>`;
+  if (p.option) h += `<span class="pp-badge ${p.option === 'TEAM OPT' ? 'tag-opt-to' : 'tag-opt-po'}">${p.option === 'TEAM OPT' ? 'Team Option' : 'Player Option'}</span>`;
+  if (p.ntc) h += `<span class="pp-badge trade-ntc">No-Trade Clause</span>`;
+  if (p.dvEligible) h += `<span class="pp-badge tag-dv">DV Eligible</span>`;
+  h += `</div>`;
+  h += `</div></div>`;
+
+  // Contract Overview
+  h += `<div class="pp-section"><div class="pp-section-title">Contract Overview</div><div class="pp-grid">`;
+  h += ppField('Contract End', p.end || '—');
+  h += ppField('Total Guaranteed', p.totG ? fmtFull(p.totG) : '—');
+  h += ppField('Current Guar.', p.totGCur ? fmtFull(p.totGCur) : '—');
+  h += ppField('Years of Service', p.yos || '0');
+  h += ppField('Signed', p.sigDate || '—');
+  h += ppField('Signing Team', p.sigTeam || '—');
+  h += ppField('Exception', p.exc || '—');
+  if (p.draftPick) h += ppField('Draft Pick', `#${p.draftPick}${p.draftYear ? ` (${p.draftYear})` : ''}`);
+  if (p.joinedSeason) h += ppField('With Team Since', p.joinedSeason);
+  h += `</div></div>`;
+
+  // Year-by-Year Salary Table
+  h += `<div class="pp-section"><div class="pp-section-title">Year-by-Year Salary</div>`;
+  h += `<table class="pp-sal-table"><thead><tr><th>Season</th><th>Salary</th><th>Guaranteed</th><th>Status</th></tr></thead><tbody>`;
+  // 2024-25
+  if (p.sal2425) {
+    h += `<tr><td>'24-25</td><td>${fmtFull(p.sal2425)}</td><td>${fmtFull(p.sal2425)}</td><td><span class="sc g" style="min-width:auto">Active</span></td></tr>`;
+  }
+  const SEASON_LABELS = ["'25-26","'26-27","'27-28","'28-29","'29-30","'30-31"];
+  for (let i = 0; i < YEARS.length; i++) {
+    const y = p.yrs[i];
+    if (!y || (!y.sal && !y.st)) continue;
+    const cls = {'GUARANTEED':'g','PARTIAL G':'pg','NOT G':'ng','TEAM OPT':'to','PLAYER OPT':'po','TWO-WAY':'tw','10-DAY':'td'}[y.st] || 'g';
+    const stLabel = {'GUARANTEED':'Guaranteed','PARTIAL G':'Partial G','NOT G':'Non-Guaranteed','TEAM OPT':'Team Option','PLAYER OPT':'Player Option','TWO-WAY':'Two-Way','10-DAY':'10-Day'}[y.st] || y.st;
+    h += `<tr><td>${SEASON_LABELS[i]}</td><td>${fmtFull(y.sal)}</td><td>${y.ch ? fmtFull(y.ch) : fmtFull(y.sal)}</td><td><span class="sc ${cls}" style="min-width:auto">${stLabel}</span></td></tr>`;
+  }
+  h += `</tbody></table></div>`;
+
+  // End Scenarios & FA Status
+  const scenarios = getEndScenarios(p);
+  if (scenarios.length) {
+    h += `<div class="pp-section"><div class="pp-section-title">Contract End Scenarios</div>`;
+    for (const sc of scenarios) {
+      const ey = sc.endYr;
+      const lastYrIdx = ey - 2026;
+      const lastSal = lastYrIdx >= 0 && lastYrIdx < YEARS.length ? (p.yrs[lastYrIdx]?.sal || 0) : 0;
+      const chYrIdx = ey - 2025;
+      const isTW = (p.notes||'').toLowerCase().includes('two-way') || p.yrs.some(y => y.st === 'TWO-WAY');
+      const isMin = (p.exc||'').toLowerCase().includes('minimum');
+      let chInfo = '';
+      if (lastSal || isTW || isMin) {
+        const ch = calcCapHold(lastSal, p, chYrIdx, ey);
+        if (ch) chInfo = `Cap Hold: ${fmtFull(ch.hold)} (${ch.rights})`;
+      }
+      const fa = calcFAStatus(p, ey, sc.optDeclined);
+      const scLabel = sc.cls === 'sc-first' ? '(option declined)' : sc.cls === 'sc-last' ? '(full contract)' : '(option scenario)';
+      h += `<div style="padding:.35rem 0;font-size:.75rem">`;
+      h += `<strong>Free agent ${ey}</strong> <span style="color:var(--text-muted)">${scLabel}</span>`;
+      h += ` — <span class="pp-badge ${fa.status === 'RFA' ? 'tag-tk' : 'tag-ext-na'}" style="font-size:.65rem">${fa.status}</span>`;
+      if (fa.qo) h += ` <span style="color:var(--text-secondary)">QO: ${fmtFull(fa.qo)}</span>`;
+      if (fa.detail) h += ` <span style="color:var(--text-muted);font-size:.65rem">(${fa.detail})</span>`;
+      if (chInfo) h += `<div style="color:var(--text-secondary);font-size:.65rem;margin-top:.1rem">${chInfo}</div>`;
+      h += `</div>`;
+    }
+    h += `</div>`;
+  }
+
+  // Extension Eligibility
+  if (p.ext) {
+    h += `<div class="pp-section"><div class="pp-section-title">Extension Eligibility</div>`;
+    const extCls = {'eligible':'tag-ext-elig','future':'tag-ext-date','ineligible':'tag-ext-inelig','rookie':'tag-ext-rookie','extended':'tag-ext-done','na':'tag-ext-na','unknown':'tag-ext-na'}[p.ext.status] || 'tag-ext-na';
+    h += `<div style="font-size:.8rem"><span class="pp-badge ${extCls}">${p.ext.text}</span></div>`;
+    if (p.ext.detail) h += `<div style="font-size:.7rem;color:var(--text-secondary);margin-top:.25rem">${p.ext.detail}</div>`;
+    h += `</div>`;
+  }
+
+  // Trade Info
+  const ts = tradeStatus(p);
+  if (ts || p.tk || p.lb || p.ub || p.tradeRestriction) {
+    h += `<div class="pp-section"><div class="pp-section-title">Trade Information</div><div class="pp-grid">`;
+    if (ts) h += ppField('Trade Status', `<span class="pp-badge ${ts.cls}">${ts.text}</span>${ts.detail ? '<br><span style="font-size:.6rem;color:var(--text-muted)">' + ts.detail + '</span>' : ''}`);
+    if (p.tk) h += ppField('Trade Kicker', p.tk);
+    if (p.tradeRestriction) h += ppField('Restriction Until', p.tradeRestriction);
+    if (p.lb) h += ppField('Likely Bonus', p.lb);
+    if (p.ub) h += ppField('Unlikely Bonus', p.ub);
+    h += `</div></div>`;
+  }
+
+  // Awards
+  if (p.allAwards && p.allAwards.length) {
+    h += `<div class="pp-section"><div class="pp-section-title">Awards</div>`;
+    const sorted = [...p.allAwards].sort((a,b) => b.year - a.year);
+    h += `<div style="display:flex;flex-wrap:wrap;gap:.3rem">`;
+    for (const a of sorted) {
+      h += `<span class="pp-badge tag-exc" style="font-size:.6rem">${a.award} '${String(a.year).slice(-2)}</span>`;
+    }
+    h += `</div></div>`;
+  }
+
+  // Starter Criteria
+  if (p.scStats) {
+    h += `<div class="pp-section"><div class="pp-section-title">Starter Criteria</div><div class="pp-grid">`;
+    h += ppField('Games Started (S4/S3)', `${p.scStats.gs_curr} / ${p.scStats.gs_prev}`);
+    h += ppField('Minutes (S4/S3)', `${p.scStats.min_curr} / ${p.scStats.min_prev}`);
+    h += ppField('Criteria Met', p.starterCriteria ? '<span style="color:var(--green);font-weight:700">Yes</span>' : '<span style="color:var(--red);font-weight:700">No</span>');
+    if (p.scStats.reason) h += ppField('Reason', p.scStats.reason);
+    h += `</div></div>`;
+  }
+
+  h += `<div style="padding:.75rem 1.25rem;text-align:center">`;
+  h += `<span style="font-size:.65rem;color:var(--text-muted)">Data compiled by HoopsMatic</span>`;
+  h += `</div>`;
+
+  h += `</div>`;
+  return h;
+}
+
+function ppField(label, value) {
+  return `<div class="pp-field"><div class="pp-field-label">${label}</div><div class="pp-field-value">${value}</div></div>`;
+}
+
+// Hash routing: open player page from URL
+window.addEventListener('hashchange', () => {
+  const name = decodeURIComponent(location.hash.slice(1));
+  if (name && allPlayers.length) showPlayer(name);
+  else closePlayer();
+});
+
+// Check hash on initial load (after data loads)
+function checkHashPlayer() {
+  if (location.hash.length > 1) {
+    const name = decodeURIComponent(location.hash.slice(1));
+    if (name) showPlayer(name);
+  }
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closePlayer(); });
 
 loadData();
 </script>
