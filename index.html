@@ -183,12 +183,12 @@
   .pp-badges{display:flex;flex-wrap:wrap;gap:.3rem;margin-top:.3rem;}
   .pp-badge{font-size:.6rem;font-weight:600;padding:.15rem .4rem;border-radius:4px;}
   .pp-section{padding:.75rem 1.25rem;border-top:1px solid var(--border-light);}
-  .pp-section-title{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:var(--text-muted);margin-bottom:.5rem;}
+  .pp-section-title{font-size:.75rem;font-weight:800;text-transform:uppercase;letter-spacing:.4px;color:var(--text);margin-bottom:.5rem;}
   .pp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:.5rem;}
   .pp-field{font-size:.75rem;}
   .pp-field-label{font-size:.6rem;color:var(--text-muted);font-weight:600;text-transform:uppercase;letter-spacing:.3px;}
   .pp-field-value{font-weight:600;color:var(--text);margin-top:.1rem;}
-  .pp-sal-table{width:100%;border-collapse:collapse;font-size:.75rem;table-layout:fixed;}
+  .pp-sal-table{width:100%;border-collapse:collapse;font-size:.75rem;}
   .pp-sal-table th{background:var(--bg);font-size:.6rem;text-transform:uppercase;letter-spacing:.3px;padding:.35rem .5rem;text-align:center;font-weight:600;color:var(--text-secondary);border-bottom:1px solid var(--border);}
   .pp-sal-table td{padding:.35rem .5rem;text-align:center;border-bottom:1px solid var(--border-light);}
   .pp-link{color:var(--accent);cursor:pointer;text-decoration:none;}
@@ -363,7 +363,7 @@ function fmtS(n) {
   if (n >= 1e3) return '$' + (n/1e3).toFixed(0) + 'K';
   return '$' + n.toLocaleString();
 }
-function fmtFull(n) { return n ? '$' + n.toLocaleString() : ''; }
+function fmtFull(n) { return (n !== null && n !== undefined) ? '$' + n.toLocaleString() : ''; }
 
 // =====================================================
 // CAP HOLD CALCULATIONS
