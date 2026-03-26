@@ -1621,12 +1621,13 @@ function renderPlayerPage(p) {
   // 2025-26 Stats
   const st = playerStats[p.name];
   if (st) {
-    h += `<div class="pp-section"><div class="pp-section-title">2025-26 Season Stats</div><div class="pp-grid">`;
-    h += ppField('Games', st.gp);
-    h += ppField('Minutes', st.mpg != null ? st.mpg.toFixed(1) : '—');
-    h += ppField('Points', st.ppg != null ? st.ppg.toFixed(1) : '—');
-    h += ppField('Rebounds', st.rpg != null ? st.rpg.toFixed(1) : '—');
-    h += ppField('Assists', st.apg != null ? st.apg.toFixed(1) : '—');
+    h += `<div class="pp-section"><div class="pp-section-title">2025-26 Season Stats</div>`;
+    h += `<div style="display:flex;gap:1.5rem;flex-wrap:wrap;font-size:.75rem">`;
+    h += `<div><span style="font-size:.6rem;color:var(--text-muted);font-weight:600;text-transform:uppercase;letter-spacing:.3px">Games</span><div style="font-weight:700">${st.gp}</div></div>`;
+    h += `<div><span style="font-size:.6rem;color:var(--text-muted);font-weight:600;text-transform:uppercase;letter-spacing:.3px">Minutes</span><div style="font-weight:700">${st.mpg != null ? st.mpg.toFixed(1) : '—'}</div></div>`;
+    h += `<div><span style="font-size:.6rem;color:var(--text-muted);font-weight:600;text-transform:uppercase;letter-spacing:.3px">Points</span><div style="font-weight:700">${st.ppg != null ? st.ppg.toFixed(1) : '—'}</div></div>`;
+    h += `<div><span style="font-size:.6rem;color:var(--text-muted);font-weight:600;text-transform:uppercase;letter-spacing:.3px">Rebounds</span><div style="font-weight:700">${st.rpg != null ? st.rpg.toFixed(1) : '—'}</div></div>`;
+    h += `<div><span style="font-size:.6rem;color:var(--text-muted);font-weight:600;text-transform:uppercase;letter-spacing:.3px">Assists</span><div style="font-weight:700">${st.apg != null ? st.apg.toFixed(1) : '—'}</div></div>`;
     h += `</div></div>`;
   }
 
