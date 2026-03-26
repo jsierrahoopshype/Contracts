@@ -169,7 +169,7 @@
   /* Player Detail Page */
   .pp-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.4);z-index:10000;display:none;overflow-y:auto;-webkit-overflow-scrolling:touch;}
   .pp-overlay.open{display:flex;justify-content:center;padding:2rem 1rem;}
-  .pp-card{background:var(--surface);border-radius:12px;max-width:720px;width:100%;border:1px solid var(--border);position:relative;align-self:flex-start;animation:ppIn .2s ease;}
+  .pp-card{background:var(--surface);border-radius:12px;max-width:720px;width:100%;border:1px solid var(--border);position:relative;align-self:flex-start;animation:ppIn .2s ease;overflow:hidden;}
   @keyframes ppIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
   .pp-close{position:absolute;top:.75rem;right:.75rem;background:none;border:none;font-size:1.2rem;cursor:pointer;color:var(--text-muted);line-height:1;padding:.25rem;}
   .pp-close:hover{color:var(--text);}
@@ -188,7 +188,7 @@
   .pp-field{font-size:.75rem;}
   .pp-field-label{font-size:.6rem;color:var(--text-muted);font-weight:600;text-transform:uppercase;letter-spacing:.3px;}
   .pp-field-value{font-weight:600;color:var(--text);margin-top:.1rem;}
-  .pp-sal-table{width:100%;border-collapse:collapse;font-size:.75rem;}
+  .pp-sal-table{width:100%;border-collapse:collapse;font-size:.75rem;table-layout:fixed;}
   .pp-sal-table th{background:var(--bg);font-size:.6rem;text-transform:uppercase;letter-spacing:.3px;padding:.35rem .5rem;text-align:center;font-weight:600;color:var(--text-secondary);border-bottom:1px solid var(--border);}
   .pp-sal-table td{padding:.35rem .5rem;text-align:center;border-bottom:1px solid var(--border-light);}
   .pp-link{color:var(--accent);cursor:pointer;text-decoration:none;}
@@ -657,7 +657,7 @@ function dvLabel(p) {
   const short = { 'Most Valuable Player': 'MVP', 'Defensive Player of the Year': 'DPOY',
     'All-NBA First Team': 'All-NBA 1st', 'All-NBA Second Team': 'All-NBA 2nd', 'All-NBA Third Team': 'All-NBA 3rd' };
   const items = p.dvAwards.map(a => `${short[a.award]||a.award} '${String(a.year).slice(-2)}`).join(', ');
-  return ` · DV Eligible (${items})`;
+  return ` · Designated Veteran Eligible (${items})`;
 }
 
 function maxPct(p) {
@@ -1484,7 +1484,7 @@ function extTag(ext) {
   const title = ext.detail ? ` title="${ext.detail}"` : '';
   let html = `<span class="tag ${cls}"${title}>${ext.text}</span>`;
   if (ext.dv) {
-    html += '<span class="tag tag-dv">DV</span>';
+    html += '<span class="tag tag-dv">Designated Veteran</span>';
   }
   return html;
 }
@@ -1524,30 +1524,28 @@ function renderPlayerPage(p) {
     : `<span class="ini">${ini(p.name)}</span>`;
   const logo = teamLogo(p.team);
 
+  // Current salary (25-26)
+  const curSal = p.yrs[0]?.sal || 0;
+
   let h = `<div class="pp-card">`;
   h += `<button class="pp-close" onclick="closePlayer()">✕</button>`;
 
-  // Header: headshot, name, team
+  // Header: headshot, name, team, salary
   h += `<div class="pp-hdr">`;
   h += `<div class="pp-hs">${hsH}</div>`;
   h += `<div>`;
   h += `<div class="pp-name">${p.name}</div>`;
-  h += `<div class="pp-team">${logo ? `<img src="${logo}">` : ''}${p.team || 'Free Agent'}</div>`;
-  // Badges
-  h += `<div class="pp-badges">`;
-  if (p.exc) h += `<span class="pp-badge tag-exc">${shortExc(p.exc)}</span>`;
-  if (p.notes) h += `<span class="pp-badge tag-type">${shortNotes(p.notes)}</span>`;
-  if (p.option) h += `<span class="pp-badge ${p.option === 'TEAM OPT' ? 'tag-opt-to' : 'tag-opt-po'}">${p.option === 'TEAM OPT' ? 'Team Option' : 'Player Option'}</span>`;
-  if (p.ntc) h += `<span class="pp-badge trade-ntc">No-Trade Clause</span>`;
-  if (p.dvEligible) h += `<span class="pp-badge tag-dv">DV Eligible</span>`;
-  h += `</div>`;
+  h += `<div class="pp-team">${logo ? `<img src="${logo}">` : ''}${p.team || 'Free Agent'}${curSal ? ` · <strong>${fmtFull(curSal)}</strong>` : ''}</div>`;
   h += `</div></div>`;
 
   // Contract Overview
+  let endLabel = p.end || '—';
+  if (p.option === 'TEAM OPT') endLabel += ' (TO)';
+  else if (p.option === 'PLAYER OPT') endLabel += ' (PO)';
+
   h += `<div class="pp-section"><div class="pp-section-title">Contract Overview</div><div class="pp-grid">`;
-  h += ppField('Contract End', p.end || '—');
+  h += ppField('Contract End', endLabel);
   h += ppField('Total Guaranteed', p.totG ? fmtFull(p.totG) : '—');
-  h += ppField('Current Guar.', p.totGCur ? fmtFull(p.totGCur) : '—');
   h += ppField('Years of Service', p.yos || '0');
   h += ppField('Signed', p.sigDate || '—');
   h += ppField('Signing Team', p.sigTeam || '—');
@@ -1556,13 +1554,10 @@ function renderPlayerPage(p) {
   if (p.joinedSeason) h += ppField('With Team Since', p.joinedSeason);
   h += `</div></div>`;
 
-  // Year-by-Year Salary Table
+  // Year-by-Year Salary Table (25-26 onwards only)
   h += `<div class="pp-section"><div class="pp-section-title">Year-by-Year Salary</div>`;
+  h += `<div style="overflow-x:auto">`;
   h += `<table class="pp-sal-table"><thead><tr><th>Season</th><th>Salary</th><th>Guaranteed</th><th>Status</th></tr></thead><tbody>`;
-  // 2024-25
-  if (p.sal2425) {
-    h += `<tr><td>'24-25</td><td>${fmtFull(p.sal2425)}</td><td>${fmtFull(p.sal2425)}</td><td><span class="sc g" style="min-width:auto">Active</span></td></tr>`;
-  }
   const SEASON_LABELS = ["'25-26","'26-27","'27-28","'28-29","'29-30","'30-31"];
   for (let i = 0; i < YEARS.length; i++) {
     const y = p.yrs[i];
@@ -1571,7 +1566,7 @@ function renderPlayerPage(p) {
     const stLabel = {'GUARANTEED':'Guaranteed','PARTIAL G':'Partial G','NOT G':'Non-Guaranteed','TEAM OPT':'Team Option','PLAYER OPT':'Player Option','TWO-WAY':'Two-Way','10-DAY':'10-Day'}[y.st] || y.st;
     h += `<tr><td>${SEASON_LABELS[i]}</td><td>${fmtFull(y.sal)}</td><td>${y.ch ? fmtFull(y.ch) : fmtFull(y.sal)}</td><td><span class="sc ${cls}" style="min-width:auto">${stLabel}</span></td></tr>`;
   }
-  h += `</tbody></table></div>`;
+  h += `</tbody></table></div></div>`;
 
   // End Scenarios & FA Status
   const scenarios = getEndScenarios(p);
@@ -1590,7 +1585,11 @@ function renderPlayerPage(p) {
         if (ch) chInfo = `Cap Hold: ${fmtFull(ch.hold)} (${ch.rights})`;
       }
       const fa = calcFAStatus(p, ey, sc.optDeclined);
-      const scLabel = sc.cls === 'sc-first' ? '(option declined)' : sc.cls === 'sc-last' ? '(full contract)' : '(option scenario)';
+      let scLabel;
+      if (sc.optDeclined === 'TEAM OPT') scLabel = '(if Team Option declined)';
+      else if (sc.optDeclined === 'PLAYER OPT') scLabel = '(if Player Option declined)';
+      else if (sc.cls === 'sc-last' && scenarios.length > 1) scLabel = '(if option exercised)';
+      else scLabel = '';
       h += `<div style="padding:.35rem 0;font-size:.75rem">`;
       h += `<strong>Free agent ${ey}</strong> <span style="color:var(--text-muted)">${scLabel}</span>`;
       h += ` — <span class="pp-badge ${fa.status === 'RFA' ? 'tag-tk' : 'tag-ext-na'}" style="font-size:.65rem">${fa.status}</span>`;
@@ -1607,7 +1606,11 @@ function renderPlayerPage(p) {
     h += `<div class="pp-section"><div class="pp-section-title">Extension Eligibility</div>`;
     const extCls = {'eligible':'tag-ext-elig','future':'tag-ext-date','ineligible':'tag-ext-inelig','rookie':'tag-ext-rookie','extended':'tag-ext-done','na':'tag-ext-na','unknown':'tag-ext-na'}[p.ext.status] || 'tag-ext-na';
     h += `<div style="font-size:.8rem"><span class="pp-badge ${extCls}">${p.ext.text}</span></div>`;
-    if (p.ext.detail) h += `<div style="font-size:.7rem;color:var(--text-secondary);margin-top:.25rem">${p.ext.detail}</div>`;
+    // Replace DV with Designated Veteran in detail text
+    if (p.ext.detail) {
+      const detailText = p.ext.detail.replace(/\bDV Eligible\b/g, 'Designated Veteran Eligible');
+      h += `<div style="font-size:.7rem;color:var(--text-secondary);margin-top:.25rem">${detailText}</div>`;
+    }
     h += `</div>`;
   }
 
@@ -1623,13 +1626,30 @@ function renderPlayerPage(p) {
     h += `</div></div>`;
   }
 
-  // Awards
+  // Awards — consolidate repeating awards per season, use season format
   if (p.allAwards && p.allAwards.length) {
     h += `<div class="pp-section"><div class="pp-section-title">Awards</div>`;
-    const sorted = [...p.allAwards].sort((a,b) => b.year - a.year);
-    h += `<div style="display:flex;flex-wrap:wrap;gap:.3rem">`;
+    // Group: { "award|year" → count }
+    const awMap = {};
+    const sorted = [...p.allAwards].sort((a,b) => b.year - a.year || a.award.localeCompare(b.award));
     for (const a of sorted) {
-      h += `<span class="pp-badge tag-exc" style="font-size:.6rem">${a.award} '${String(a.year).slice(-2)}</span>`;
+      const key = a.award + '|' + a.year;
+      awMap[key] = (awMap[key] || 0) + 1;
+    }
+    // Convert year to season format: 2025 → "24-25"
+    function yearToSeason(y) {
+      const s = y - 1;
+      return String(s).slice(-2) + '-' + String(y).slice(-2);
+    }
+    h += `<div style="display:flex;flex-wrap:wrap;gap:.3rem">`;
+    const seen = new Set();
+    for (const a of sorted) {
+      const key = a.award + '|' + a.year;
+      if (seen.has(key)) continue;
+      seen.add(key);
+      const count = awMap[key];
+      const label = count > 1 ? `${a.award} ${yearToSeason(a.year)} x${count}` : `${a.award} ${yearToSeason(a.year)}`;
+      h += `<span class="pp-badge tag-exc" style="font-size:.6rem">${label}</span>`;
     }
     h += `</div></div>`;
   }
