@@ -247,6 +247,18 @@ const CSV_URL = `${API_BASE}/api/contracts`;
 const ROSTER_CSV_URL = `${API_BASE}/api/roster`;
 const DRAFT_CSV_URL = `${API_BASE}/api/draft`;
 
+// Use server-injected data if available (skips network round trips)
+function _injectedOrFetch(url, globalKey) {
+  if (window[globalKey]) {
+    try {
+      const text = decodeURIComponent(escape(atob(window[globalKey])));
+      delete window[globalKey]; // free memory
+      return Promise.resolve({ ok: true, text: () => Promise.resolve(text) });
+    } catch(e) {}
+  }
+  return fetch(url);
+}
+
 const TEAM_IDS = {
   'Atlanta':1610612737,'Boston':1610612738,'Brooklyn':1610612751,
   'Charlotte':1610612766,'Chicago':1610612741,'Cleveland':1610612739,
@@ -929,11 +941,11 @@ async function loadTenureData() {
 
 async function loadData() {
   try {
-    // Fetch all three CSVs in parallel
+    // Fetch all three CSVs in parallel (uses injected data if available)
     const [csvR, rosterR, draftR] = await Promise.all([
-      fetch(CSV_URL),
-      fetch(ROSTER_CSV_URL).catch(() => null),
-      fetch(DRAFT_CSV_URL).catch(() => null),
+      _injectedOrFetch(CSV_URL, '__CSV_CONTRACTS__'),
+      _injectedOrFetch(ROSTER_CSV_URL, '__CSV_ROSTER__').catch(() => null),
+      _injectedOrFetch(DRAFT_CSV_URL, '__CSV_DRAFT__').catch(() => null),
     ]);
 
     if (!csvR.ok) throw new Error('CSV fetch failed');
