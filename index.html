@@ -169,7 +169,7 @@
   /* Player Detail Page */
   .pp-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.4);z-index:10000;display:none;overflow-y:auto;-webkit-overflow-scrolling:touch;}
   .pp-overlay.open{display:flex;justify-content:center;padding:2rem 1rem;}
-  .pp-card{background:var(--surface);border-radius:12px;max-width:720px;width:100%;border:1px solid var(--border);position:relative;align-self:flex-start;animation:ppIn .2s ease;overflow:hidden;}
+  .pp-card{background:var(--surface);border-radius:12px;max-width:720px;width:100%;border:1px solid var(--border);position:relative;align-self:flex-start;animation:ppIn .2s ease;}
   @keyframes ppIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
   .pp-close{position:absolute;top:.75rem;right:.75rem;background:none;border:none;font-size:1.2rem;cursor:pointer;color:var(--text-muted);line-height:1;padding:.25rem;}
   .pp-close:hover{color:var(--text);}
@@ -188,7 +188,7 @@
   .pp-field{font-size:.75rem;}
   .pp-field-label{font-size:.6rem;color:var(--text-muted);font-weight:600;text-transform:uppercase;letter-spacing:.3px;}
   .pp-field-value{font-weight:600;color:var(--text);margin-top:.1rem;}
-  .pp-sal-table{width:100%;border-collapse:collapse;font-size:.75rem;}
+  .pp-sal-table{width:100%;border-collapse:collapse;font-size:.75rem;min-width:0 !important;}
   .pp-sal-table th{background:var(--bg);font-size:.6rem;text-transform:uppercase;letter-spacing:.3px;padding:.35rem .5rem;text-align:center;font-weight:600;color:var(--text-secondary);border-bottom:1px solid var(--border);}
   .pp-sal-table td{padding:.35rem .5rem;text-align:center;border-bottom:1px solid var(--border-light);}
   .pp-link{color:var(--accent);cursor:pointer;text-decoration:none;}
@@ -973,12 +973,15 @@ async function loadTenureData() {
 
 async function loadStats() {
   try {
+    console.log('[Stats] Fetching from', `${API_BASE}/api/stats`);
     const ctrl = new AbortController();
     const timer = setTimeout(() => ctrl.abort(), 8000);
     const resp = await fetch(`${API_BASE}/api/stats`, { signal: ctrl.signal });
     clearTimeout(timer);
+    console.log('[Stats] Response:', resp.status, resp.statusText);
     if (!resp.ok) { console.warn('Stats: HTTP', resp.status); return; }
     const data = await resp.json();
+    console.log('[Stats] Received', data.length, 'players');
     const norm = s => s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\./g,'').replace(/\s+/g,' ').trim().toLowerCase()
       .replace(/\s+(jr|sr|ii|iii|iv|v)$/,'');
     const statsByNorm = {};
@@ -988,8 +991,8 @@ async function loadStats() {
       const s = statsByNorm[norm(p.name)];
       if (s) { playerStats[p.name] = s; matched++; }
     });
-    console.log(`Stats: matched ${matched} of ${data.length} players`);
-  } catch(e) { console.warn('Stats load failed:', e.message); }
+    console.log(`[Stats] Matched ${matched} of ${data.length} players`);
+  } catch(e) { console.warn('[Stats] Load failed:', e.message); }
 }
 
 async function loadData() {
@@ -1728,7 +1731,7 @@ function checkHashPlayer() {
 
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closePlayer(); });
 
-console.log('%c[HoopsMatic Contracts v2.1]', 'color:#3b82f6;font-weight:bold');
+console.log('%c[HoopsMatic Contracts v2.2]', 'color:#3b82f6;font-weight:bold');
 loadData();
 </script>
 </body>
