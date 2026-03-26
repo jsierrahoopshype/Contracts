@@ -1556,17 +1556,17 @@ function renderPlayerPage(p) {
 
   // Year-by-Year Salary Table (25-26 onwards only)
   h += `<div class="pp-section"><div class="pp-section-title">Year-by-Year Salary</div>`;
-  h += `<div style="overflow-x:auto">`;
-  h += `<table class="pp-sal-table"><thead><tr><th>Season</th><th>Salary</th><th>Guaranteed</th><th>Status</th></tr></thead><tbody>`;
+  h += `<table class="pp-sal-table"><thead><tr><th>Season</th><th>Salary</th><th>Status</th></tr></thead><tbody>`;
   const SEASON_LABELS = ["'25-26","'26-27","'27-28","'28-29","'29-30","'30-31"];
   for (let i = 0; i < YEARS.length; i++) {
     const y = p.yrs[i];
     if (!y || (!y.sal && !y.st)) continue;
     const cls = {'GUARANTEED':'g','PARTIAL G':'pg','NOT G':'ng','TEAM OPT':'to','PLAYER OPT':'po','TWO-WAY':'tw','10-DAY':'td'}[y.st] || 'g';
     const stLabel = {'GUARANTEED':'Guaranteed','PARTIAL G':'Partial G','NOT G':'Non-Guaranteed','TEAM OPT':'Team Option','PLAYER OPT':'Player Option','TWO-WAY':'Two-Way','10-DAY':'10-Day'}[y.st] || y.st;
-    h += `<tr><td>${SEASON_LABELS[i]}</td><td>${fmtFull(y.sal)}</td><td>${y.ch ? fmtFull(y.ch) : fmtFull(y.sal)}</td><td><span class="sc ${cls}" style="min-width:auto">${stLabel}</span></td></tr>`;
+    const guarTitle = (y.st === 'PARTIAL G' || y.st === 'NOT G') && y.ch ? ` title="Guaranteed: ${fmtFull(y.ch)}"` : '';
+    h += `<tr><td>${SEASON_LABELS[i]}</td><td>${fmtFull(y.sal)}</td><td><span class="sc ${cls}" style="min-width:auto;cursor:${guarTitle ? 'help' : 'default'}"${guarTitle}>${stLabel}</span></td></tr>`;
   }
-  h += `</tbody></table></div></div>`;
+  h += `</tbody></table></div>`;
 
   // End Scenarios & FA Status
   const scenarios = getEndScenarios(p);
