@@ -173,7 +173,9 @@
   @keyframes ppIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
   .pp-close{position:absolute;top:.75rem;right:.75rem;background:none;border:none;font-size:1.2rem;cursor:pointer;color:var(--text-muted);line-height:1;padding:.25rem;}
   .pp-close:hover{color:var(--text);}
-  .pp-hdr{display:flex;align-items:center;gap:1rem;padding:1.25rem 1.25rem .75rem;}
+  .pp-hdr{display:flex;align-items:center;gap:1rem;padding:1.25rem 1.25rem .75rem;cursor:grab;user-select:none;}
+  .pp-hdr:active{cursor:grabbing;}
+  .pp-card.dragging{box-shadow:0 12px 40px rgba(0,0,0,.2);opacity:.95;position:relative;}
   .pp-hs{width:64px;height:48px;border-radius:6px;background:#f0f1f3;overflow:hidden;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
   .pp-hs img{width:100%;height:100%;object-fit:cover;}
   .pp-hs .ini{font-size:1rem;font-weight:700;color:var(--text-muted);}
@@ -1170,7 +1172,16 @@ async function loadData() {
       loadStarterCriteria(),
       loadTenureData(),
       loadStats(),
-    ]).then(() => applyFilters()).catch(() => {});
+    ]).then(() => {
+      applyFilters();
+      // Re-render open player card if any (so stats show up)
+      const overlay = document.getElementById('playerOverlay');
+      if (overlay && overlay.classList.contains('open') && location.hash.length > 1) {
+        const name = decodeURIComponent(location.hash.slice(1));
+        const p = allPlayers.find(pl => pl.name === name);
+        if (p) overlay.innerHTML = renderPlayerPage(p);
+      }
+    }).catch(() => {});
 
   } catch(err) {
     document.getElementById('loading').style.display = 'none';
@@ -1533,6 +1544,8 @@ function showPlayer(name) {
   overlay.innerHTML = renderPlayerPage(p);
   overlay.classList.add('open');
   document.body.style.overflow = 'hidden';
+  const card = overlay.querySelector('.pp-card');
+  if (card) setupCardDrag(card);
 }
 
 function closePlayer() {
@@ -1541,6 +1554,39 @@ function closePlayer() {
   overlay.innerHTML = '';
   document.body.style.overflow = '';
   history.replaceState(null, '', location.pathname + location.search);
+}
+
+function setupCardDrag(card) {
+  const hdr = card.querySelector('.pp-hdr');
+  if (!hdr) return;
+  let dragging = false, startX, startY, origX, origY;
+  hdr.addEventListener('mousedown', e => {
+    if (e.target.closest('button, a, input')) return;
+    dragging = true;
+    card.classList.add('dragging');
+    const rect = card.getBoundingClientRect();
+    const overlay = card.closest('.pp-overlay');
+    const oRect = overlay.getBoundingClientRect();
+    // Switch to absolute positioning within overlay
+    if (!card.style.position || card.style.position !== 'absolute') {
+      card.style.position = 'absolute';
+      card.style.left = (rect.left - oRect.left + overlay.scrollLeft) + 'px';
+      card.style.top = (rect.top - oRect.top + overlay.scrollTop) + 'px';
+      card.style.margin = '0';
+      card.style.alignSelf = 'unset';
+    }
+    startX = e.clientX; startY = e.clientY;
+    origX = parseInt(card.style.left); origY = parseInt(card.style.top);
+    e.preventDefault();
+  });
+  document.addEventListener('mousemove', e => {
+    if (!dragging) return;
+    card.style.left = (origX + e.clientX - startX) + 'px';
+    card.style.top = (origY + e.clientY - startY) + 'px';
+  });
+  document.addEventListener('mouseup', () => {
+    if (dragging) { dragging = false; card.classList.remove('dragging'); }
+  });
 }
 
 function renderPlayerPage(p) {
@@ -1731,7 +1777,7 @@ function checkHashPlayer() {
 
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closePlayer(); });
 
-console.log('%c[HoopsMatic Contracts v2.2]', 'color:#3b82f6;font-weight:bold');
+console.log('%c[HoopsMatic Contracts v2.3]', 'color:#3b82f6;font-weight:bold');
 loadData();
 </script>
 </body>
