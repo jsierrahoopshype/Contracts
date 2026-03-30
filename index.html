@@ -15,7 +15,7 @@
     --border-light: #eef0f2;
     --text: #1a1a2e;
     --text-secondary: #5a6070;
-    --text-muted: #9ca3af;
+    --text-muted: #8892a6;
     --accent: #3b82f6;
     --accent-dim: rgba(59,130,246,0.07);
     --green: #16a34a;
@@ -30,10 +30,10 @@
   .container { max-width: 100%; margin: 0 auto; padding: 0 1.25rem 1.25rem; }
 
   /* Header — clean white like TM */
-  .header { padding: 1.5rem 1.25rem 0.75rem; }
+  .header { background: var(--surface); border-bottom: 1px solid var(--border); padding: 1.5rem 1.25rem 0.75rem; }
   .header-inner { max-width: 1600px; margin: 0 auto; display: flex; align-items: baseline; gap: 0.75rem; flex-wrap: wrap; }
   .header h1 { font-weight: 800; font-size: 1.6rem; letter-spacing: -0.03em; color: var(--text); }
-  .header .tag { font-family: 'DM Mono', monospace; font-size: 0.6rem; color: var(--text-muted); background: var(--border-light); padding: 0.2em 0.6em; border-radius: 4px; letter-spacing: 0.03em; }
+  .header .tag { font-family: 'DM Mono', monospace; font-size: 0.6rem; color: var(--accent); background: rgba(59,130,246,0.08); padding: 0.2em 0.6em; border-radius: 4px; letter-spacing: 0.03em; }
   .header-sub { color: var(--text-muted); font-size: 0.8rem; margin-left: auto; }
   .header-sub a { color: var(--accent); text-decoration: none; }
 
