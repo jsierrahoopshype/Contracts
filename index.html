@@ -19,13 +19,14 @@
 body { font-family:'DM Sans',-apple-system,BlinkMacSystemFont,sans-serif; background:var(--bg); color:var(--text); min-height:100vh; line-height:1.5; }
 ::-webkit-scrollbar{height:5px;width:5px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:#d1d5db;border-radius:3px}
 
+
 /* — Header — */
-.header { background:var(--surface); border-bottom:1px solid var(--border); padding:1.5rem 2rem 1.25rem; }
-.header::before { display:none; }
+.header { padding:1.5rem 2rem 0.75rem; }
 .header-inner { max-width:1400px; margin:0 auto; display:flex; align-items:baseline; gap:0.75rem; flex-wrap:wrap; }
 .header h1, .header-brand h1 { font-weight:800; font-size:1.5rem; letter-spacing:-0.02em; color:var(--text); }
 .header .tag { font-family:'JetBrains Mono','DM Mono',monospace; font-size:0.6rem; color:var(--accent); background:var(--accent-dim); padding:0.2em 0.6em; border-radius:4px; letter-spacing:0.04em; }
 .header-subtitle { color:var(--text2); font-size:0.85rem; }
+
 
 /* — Stat Cards — */
 .stats-bar { max-width:1400px; margin:1rem auto 0; padding:0 2rem; display:grid; grid-template-columns:repeat(4,1fr); gap:0.75rem; }
@@ -84,15 +85,15 @@ body { min-width:fit-content; }
 .container { max-width:100%; margin:0 auto; padding:0 1.25rem 1.25rem; }
 
 /* Header override for wider layout */
-.header { padding:1.5rem 1.25rem 0.75rem; }
-.header-inner { max-width:1600px; }
+.header { padding:1.5rem 2rem 0.75rem; }
+.header-inner { max-width:1400px; }
 .header h1 { font-size:1.5rem; letter-spacing:-0.03em; }
 .header .tag { font-family:'DM Mono',monospace; }
-.header-sub { color:var(--text-muted); font-size:0.8rem; margin-left:auto; }
-.header-sub a { color:var(--accent); text-decoration:none; }
+
+
 
 /* Controls bar */
-.controls { display:flex; gap:0.5rem; align-items:center; flex-wrap:wrap; margin-bottom:0.75rem; padding:0.6rem 0.75rem; background:var(--surface); border:1px solid var(--border); border-radius:10px; max-width:none; }
+.controls { display:flex; gap:0.5rem; align-items:center; flex-wrap:wrap; margin-bottom:0.75rem; padding:0.6rem 0; max-width:none; }
 .search-box { flex:1; min-width:180px; padding:0.5rem 0.75rem; background:var(--bg); border:1px solid var(--border); border-radius:8px; color:var(--text); font-family:inherit; font-size:0.85rem; outline:none; transition:border-color .2s, box-shadow .2s; }
 .search-box::placeholder { color:var(--text-muted); }
 .search-box:focus { border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-dim); }
@@ -229,15 +230,13 @@ footer a { color:var(--accent); text-decoration:none; font-weight:500; }
 </head>
 <body>
 
-<div class="header">
-  <div class="header-inner">
-    <h1>📋 NBA Contract Database</h1>
-    <span class="tag">2024-25 → 2030-31</span>
-    <span class="header-sub">Powered by <a href="https://hoopsmatic.com" target="_blank">HoopsMatic</a></span>
-  </div>
-</div>
-
 <div class="container">
+  <div class="header" style="padding:1.5rem 0 0.75rem;">
+    <div class="header-inner" style="max-width:none;padding:0;">
+      <h1>📋 NBA Contract Database</h1>
+      <span class="tag">2024-25 → 2030-31</span>
+    </div>
+  </div>
   <div id="controls" class="controls" style="display:none;">
     <input type="text" class="search-box" id="searchBox" placeholder="Search player or team...">
     <select class="filter-select" id="filterTeam"><option value="">All Teams</option></select>
