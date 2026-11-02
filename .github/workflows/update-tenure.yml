@@ -1,5 +1,8 @@
 name: Update Player Tenure Data
 
+permissions:
+  contents: write
+
 on:
   schedule:
     # Weekly on Mondays at 11:00 UTC (after potential weekend trades settle)
@@ -17,11 +20,11 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Install dependencies
-        run: pip install requests
-
-      - name: Run tenure updater
-        run: python update_tenure.py
+      # stats.nba.com does not answer GitHub's runners, so tenure is built
+      # from nba-player-data's public rsStats.json (no packages needed).
+      # update_tenure.py (the stats.nba.com version) stays for local runs.
+      - name: Build tenure from nba-player-data
+        run: python update_tenure_from_player_data.py
 
       - name: Commit if changed
         run: |
