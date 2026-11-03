@@ -24,7 +24,7 @@ drops Jr./II/III), then by the name without its suffix when only one player
 has it. Every match after the first kind is printed, so a wrong one shows.
 """
 
-import csv, io, json, os, re, sys, unicodedata, urllib.request
+import csv, hashlib, io, json, os, re, sys, unicodedata, urllib.request
 from datetime import datetime, timezone
 
 BASELINE = 'tenure_baseline_2025-26.json'
@@ -82,6 +82,7 @@ def get(url):
 def load_season(end_year):
     src = os.environ.get('SEASON_CSV') or f"{DATA_BASE}/data/stats/rs-season-{end_year}.csv"
     text = open(src, encoding='utf-8').read() if os.path.exists(src) else get(src)
+    load_season.sha256 = hashlib.sha256(text.encode('utf-8')).hexdigest()
     rows = {}
     for r in csv.reader(io.StringIO(text)):
         if len(r) <= COL_GP or r[COL_YEAR].strip() != str(end_year):
@@ -166,6 +167,16 @@ def main():
         baseline = json.load(f)
     end_year = int(os.environ.get('SEASON_END_YEAR') or current_end_year(datetime.now(timezone.utc)))
     rows = load_season(end_year)
+    # Runs daily: when neither the box-score file nor the baseline changed
+    # since the last run, leave tenure_data.json untouched (no commit).
+    inputs = hashlib.sha256((load_season.sha256 + open(BASELINE, 'rb').read().hex()).encode()).hexdigest()
+    try:
+        with open(OUTPUT) as f:
+            if json.load(f).get('inputs_sha256') == inputs:
+                print(f"{season_str(end_year)}: box-score file unchanged since the last run, nothing to do")
+                return
+    except (OSError, ValueError):
+        pass
     print(f"{season_str(end_year)}: {len(rows)} players with a game")
     if len(rows) < MIN_SEASON_ROWS:
         print(f"FATAL: fewer than {MIN_SEASON_ROWS} players in the season file, keeping the old file")
@@ -173,6 +184,7 @@ def main():
     data, notes = build(baseline, rows, end_year, load_hm_codes())
     if notes:
         print("Matched by alias, HM Codes or suffix:\n" + "\n".join(notes))
+    data['inputs_sha256'] = inputs
     if len(data['players']) < len(baseline['players']):
         print("FATAL: fewer players than the baseline, keeping the old file")
         sys.exit(1)

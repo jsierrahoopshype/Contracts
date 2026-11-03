@@ -5,8 +5,10 @@ permissions:
 
 on:
   schedule:
-    # Weekly on Mondays at 11:00 UTC (after potential weekend trades settle)
-    - cron: '0 11 * * 1'
+    # Daily at 13:17 UTC: a few hours after nba-player-data's "Daily data
+    # chain" (05:35 UTC, backup 09:47), which writes the box-score file and
+    # often starts late. An unchanged box-score file means no commit.
+    - cron: '17 13 * * *'
   workflow_dispatch:  # Manual trigger
 
 jobs:
