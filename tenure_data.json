@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-03T11:08:29Z",
+  "updated": "2026-11-03T20:08:54Z",
   "season": "2026-27",
   "source": "tenure_baseline_2025-26.json + nba-player-data rs-season-2027.csv (team of latest game)",
   "players": {
@@ -73,6 +73,13 @@
       "joined_season": "2025-26",
       "continuous_seasons": 2
     },
+    "RayJ Dennis": {
+      "team": "ATL",
+      "team_id": 1610612737,
+      "player_id": 1642484,
+      "joined_season": "2025-26",
+      "continuous_seasons": 2
+    },
     "Aaron Wiggins": {
       "team": "ATL",
       "team_id": 1610612737,
@@ -126,13 +133,6 @@
       "team": "ATL",
       "team_id": 1610612737,
       "player_id": 1642365,
-      "joined_season": "2025-26",
-      "continuous_seasons": 1
-    },
-    "RayJ Dennis": {
-      "team": "ATL",
-      "team_id": 1610612737,
-      "player_id": 1642484,
       "joined_season": "2025-26",
       "continuous_seasons": 1
     },
@@ -374,6 +374,13 @@
       "joined_season": "2026-27",
       "continuous_seasons": 1
     },
+    "Dillon Mitchell": {
+      "team": "BOS",
+      "team_id": 1610612738,
+      "player_id": null,
+      "joined_season": "2026-27",
+      "continuous_seasons": 1
+    },
     "Max Shulga": {
       "team": "BOS",
       "team_id": 1610612738,
@@ -430,6 +437,13 @@
       "joined_season": "2024-25",
       "continuous_seasons": 3
     },
+    "Coby White": {
+      "team": "CHA",
+      "team_id": 1610612766,
+      "player_id": 1629632,
+      "joined_season": "2025-26",
+      "continuous_seasons": 2
+    },
     "Liam McNeeley": {
       "team": "CHA",
       "team_id": 1610612766,
@@ -470,13 +484,6 @@
       "team_id": 1610612766,
       "player_id": null,
       "joined_season": "2026-27",
-      "continuous_seasons": 1
-    },
-    "Coby White": {
-      "team": "CHA",
-      "team_id": 1610612766,
-      "player_id": 1629632,
-      "joined_season": "2025-26",
       "continuous_seasons": 1
     },
     "Dennis Schr\u00f6der": {
@@ -736,13 +743,6 @@
       "team_id": 1610612739,
       "player_id": 1642281,
       "joined_season": "2024-25",
-      "continuous_seasons": 3
-    },
-    "Max Strus": {
-      "team": "CLE",
-      "team_id": 1610612739,
-      "player_id": 1629622,
-      "joined_season": "2023-24",
       "continuous_seasons": 3
     },
     "James Harden": {
@@ -1746,6 +1746,13 @@
       "joined_season": "2026-27",
       "continuous_seasons": 1
     },
+    "Max Strus": {
+      "team": "LAC",
+      "team_id": 1610612746,
+      "player_id": 1629622,
+      "joined_season": "2026-27",
+      "continuous_seasons": 1
+    },
     "Nick Martinelli": {
       "team": "LAC",
       "team_id": 1610612746,
@@ -1877,6 +1884,13 @@
       "team_id": 1610612747,
       "player_id": 1641723,
       "joined_season": "2025-26",
+      "continuous_seasons": 1
+    },
+    "Lawson Lovering": {
+      "team": "LAL",
+      "team_id": 1610612747,
+      "player_id": 1643133,
+      "joined_season": "2026-27",
       "continuous_seasons": 1
     },
     "Matisse Thybulle": {
@@ -2052,13 +2066,6 @@
       "team_id": 1610612763,
       "player_id": 1631200,
       "joined_season": "2026-27",
-      "continuous_seasons": 1
-    },
-    "Lawson Lovering": {
-      "team": "MEM",
-      "team_id": 1610612763,
-      "player_id": 1643133,
-      "joined_season": "2025-26",
       "continuous_seasons": 1
     },
     "Quinten Post": {
@@ -3118,6 +3125,13 @@
       "joined_season": "2025-26",
       "continuous_seasons": 1
     },
+    "Rayan Rupert": {
+      "team": "PHI",
+      "team_id": 1610612755,
+      "player_id": 1641712,
+      "joined_season": "2026-27",
+      "continuous_seasons": 1
+    },
     "Devin Booker": {
       "team": "PHX",
       "team_id": 1610612756,
@@ -3298,13 +3312,6 @@
       "team_id": 1610612757,
       "player_id": 1642270,
       "joined_season": "2024-25",
-      "continuous_seasons": 3
-    },
-    "Rayan Rupert": {
-      "team": "POR",
-      "team_id": 1610612757,
-      "player_id": 1641712,
-      "joined_season": "2023-24",
       "continuous_seasons": 3
     },
     "Sidy Cissoko": {
@@ -4085,5 +4092,5 @@
       "continuous_seasons": 1
     }
   },
-  "inputs_sha256": "2a04641e35995928b7cc4681e93ba4fb64093a19719ab19b877a3cc03f3cb2cb"
+  "inputs_sha256": "a76bd7a559cc03a9b887c2f0f72851585cc5b2ddd20fc906617603065ce39e35"
 }
