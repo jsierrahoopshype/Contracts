@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-03T20:08:54Z",
+  "updated": "2026-11-04T20:26:55Z",
   "season": "2026-27",
   "source": "tenure_baseline_2025-26.json + nba-player-data rs-season-2027.csv (team of latest game)",
   "players": {
@@ -4092,5 +4092,5 @@
       "continuous_seasons": 1
     }
   },
-  "inputs_sha256": "a76bd7a559cc03a9b887c2f0f72851585cc5b2ddd20fc906617603065ce39e35"
+  "inputs_sha256": "ba13ebac0e1fe44cfebc21afd6370534e7b8d5fd3474498c7e26526fcbc9d20e"
 }
