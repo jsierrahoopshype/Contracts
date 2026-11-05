@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-04T20:26:55Z",
+  "updated": "2026-11-05T20:41:55Z",
   "season": "2026-27",
   "source": "tenure_baseline_2025-26.json + nba-player-data rs-season-2027.csv (team of latest game)",
   "players": {
@@ -444,6 +444,13 @@
       "joined_season": "2025-26",
       "continuous_seasons": 2
     },
+    "Kon Knueppel": {
+      "team": "CHA",
+      "team_id": 1610612766,
+      "player_id": 1642851,
+      "joined_season": "2025-26",
+      "continuous_seasons": 2
+    },
     "Liam McNeeley": {
       "team": "CHA",
       "team_id": 1610612766,
@@ -507,13 +514,6 @@
       "joined_season": "2026-27",
       "continuous_seasons": 1
     },
-    "Kon Knueppel": {
-      "team": "CHA",
-      "team_id": 1610612766,
-      "player_id": 1642851,
-      "joined_season": "2025-26",
-      "continuous_seasons": 1
-    },
     "Naz Reid": {
       "team": "CHA",
       "team_id": 1610612766,
@@ -554,7 +554,7 @@
       "team_id": 1610612741,
       "player_id": 1630172,
       "joined_season": "2020-21",
-      "continuous_seasons": 6
+      "continuous_seasons": 7
     },
     "Jalen Smith": {
       "team": "CHI",
@@ -1816,13 +1816,6 @@
       "joined_season": "2025-26",
       "continuous_seasons": 2
     },
-    "Dalton Knecht": {
-      "team": "LAL",
-      "team_id": 1610612747,
-      "player_id": 1642261,
-      "joined_season": "2024-25",
-      "continuous_seasons": 2
-    },
     "Jake LaRavia": {
       "team": "LAL",
       "team_id": 1610612747,
@@ -2719,6 +2712,13 @@
       "joined_season": "2026-27",
       "continuous_seasons": 1
     },
+    "Dalton Knecht": {
+      "team": "NYK",
+      "team_id": 1610612752,
+      "player_id": 1642261,
+      "joined_season": "2026-27",
+      "continuous_seasons": 1
+    },
     "Dillon Jones": {
       "team": "NYK",
       "team_id": 1610612752,
@@ -3454,6 +3454,13 @@
       "joined_season": "2024-25",
       "continuous_seasons": 2
     },
+    "Dylan Cardwell": {
+      "team": "SAC",
+      "team_id": 1610612758,
+      "player_id": 1642928,
+      "joined_season": "2025-26",
+      "continuous_seasons": 2
+    },
     "Nique Clifford": {
       "team": "SAC",
       "team_id": 1610612758,
@@ -3486,13 +3493,6 @@
       "team": "SAC",
       "team_id": 1610612758,
       "player_id": 1629234,
-      "joined_season": "2025-26",
-      "continuous_seasons": 1
-    },
-    "Dylan Cardwell": {
-      "team": "SAC",
-      "team_id": 1610612758,
-      "player_id": 1642928,
       "joined_season": "2025-26",
       "continuous_seasons": 1
     },
@@ -4092,5 +4092,5 @@
       "continuous_seasons": 1
     }
   },
-  "inputs_sha256": "ba13ebac0e1fe44cfebc21afd6370534e7b8d5fd3474498c7e26526fcbc9d20e"
+  "inputs_sha256": "fafcedcf925989bfcfdcd15b5f4e2d6576ebedfc1a8715e06e3203ac9d119d45"
 }
