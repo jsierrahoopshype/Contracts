@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-06T19:58:23Z",
+  "updated": "2026-11-07T18:04:01Z",
   "season": "2026-27",
   "source": "tenure_baseline_2025-26.json + nba-player-data rs-season-2027.csv (team of latest game)",
   "players": {
@@ -808,6 +808,13 @@
       "joined_season": "2026-27",
       "continuous_seasons": 1
     },
+    "Norchad Omier": {
+      "team": "CLE",
+      "team_id": 1610612739,
+      "player_id": null,
+      "joined_season": "2026-27",
+      "continuous_seasons": 1
+    },
     "Peyton Watson": {
       "team": "CLE",
       "team_id": 1610612739,
@@ -910,6 +917,13 @@
       "team": "DAL",
       "team_id": 1610612742,
       "player_id": null,
+      "joined_season": "2026-27",
+      "continuous_seasons": 1
+    },
+    "Santi Aldama": {
+      "team": "DAL",
+      "team_id": 1610612742,
+      "player_id": 1630583,
       "joined_season": "2026-27",
       "continuous_seasons": 1
     },
@@ -1809,6 +1823,13 @@
       "joined_season": "2024-25",
       "continuous_seasons": 3
     },
+    "Adou Thiero": {
+      "team": "LAL",
+      "team_id": 1610612747,
+      "player_id": 1642876,
+      "joined_season": "2025-26",
+      "continuous_seasons": 2
+    },
     "Chris Ma\u00f1on": {
       "team": "LAL",
       "team_id": 1610612747,
@@ -1829,13 +1850,6 @@
       "player_id": 1628467,
       "joined_season": "2024-25",
       "continuous_seasons": 2
-    },
-    "Adou Thiero": {
-      "team": "LAL",
-      "team_id": 1610612747,
-      "player_id": 1642876,
-      "joined_season": "2025-26",
-      "continuous_seasons": 1
     },
     "Cameron Carr": {
       "team": "LAL",
@@ -1934,13 +1948,6 @@
       "player_id": 1629634,
       "joined_season": "2019-20",
       "continuous_seasons": 7
-    },
-    "Santi Aldama": {
-      "team": "MEM",
-      "team_id": 1610612763,
-      "player_id": 1630583,
-      "joined_season": "2021-22",
-      "continuous_seasons": 5
     },
     "GG Jackson": {
       "team": "MEM",
@@ -2852,6 +2859,13 @@
       "joined_season": "2025-26",
       "continuous_seasons": 1
     },
+    "Dalen Terry": {
+      "team": "OKC",
+      "team_id": 1610612760,
+      "player_id": 1631207,
+      "joined_season": "2026-27",
+      "continuous_seasons": 1
+    },
     "Josh Dix": {
       "team": "OKC",
       "team_id": 1610612760,
@@ -3062,13 +3076,6 @@
       "joined_season": "2026-27",
       "continuous_seasons": 1
     },
-    "Dalen Terry": {
-      "team": "PHI",
-      "team_id": 1610612755,
-      "player_id": 1631207,
-      "joined_season": "2025-26",
-      "continuous_seasons": 1
-    },
     "Dean Wade": {
       "team": "PHI",
       "team_id": 1610612755,
@@ -3129,6 +3136,13 @@
       "team": "PHI",
       "team_id": 1610612755,
       "player_id": 1641712,
+      "joined_season": "2026-27",
+      "continuous_seasons": 1
+    },
+    "Tacko Fall": {
+      "team": "PHI",
+      "team_id": 1610612755,
+      "player_id": null,
       "joined_season": "2026-27",
       "continuous_seasons": 1
     },
@@ -4092,5 +4106,5 @@
       "continuous_seasons": 1
     }
   },
-  "inputs_sha256": "e0913ae8e11dda83f0b595badc552bcf4c8201ce2f5cd1ef0936780538aa8e13"
+  "inputs_sha256": "024fae176163002634412065869d00e52232530a4e04ea32b0e92e9aa52625d8"
 }
