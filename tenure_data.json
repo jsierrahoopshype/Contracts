@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-07T18:04:01Z",
+  "updated": "2026-11-08T18:23:28Z",
   "season": "2026-27",
   "source": "tenure_baseline_2025-26.json + nba-player-data rs-season-2027.csv (team of latest game)",
   "players": {
@@ -997,6 +997,13 @@
       "joined_season": "2023-24",
       "continuous_seasons": 3
     },
+    "Spencer Jones": {
+      "team": "DEN",
+      "team_id": 1610612743,
+      "player_id": 1642461,
+      "joined_season": "2024-25",
+      "continuous_seasons": 3
+    },
     "Cameron Johnson": {
       "team": "DEN",
       "team_id": 1610612743,
@@ -1009,13 +1016,6 @@
       "team_id": 1610612743,
       "player_id": 1641747,
       "joined_season": "2025-26",
-      "continuous_seasons": 2
-    },
-    "Spencer Jones": {
-      "team": "DEN",
-      "team_id": 1610612743,
-      "player_id": 1642461,
-      "joined_season": "2024-25",
       "continuous_seasons": 2
     },
     "Alpha Diallo": {
@@ -1520,7 +1520,7 @@
       "team_id": 1610612754,
       "player_id": 204456,
       "joined_season": "2019-20",
-      "continuous_seasons": 7
+      "continuous_seasons": 8
     },
     "Tyrese Haliburton": {
       "team": "IND",
@@ -4106,5 +4106,5 @@
       "continuous_seasons": 1
     }
   },
-  "inputs_sha256": "024fae176163002634412065869d00e52232530a4e04ea32b0e92e9aa52625d8"
+  "inputs_sha256": "266b4df335adc5c33950c1ad10a167fe275aa8e412ec2e63bc6679384e7e8e14"
 }
