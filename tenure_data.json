@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-08T18:23:28Z",
+  "updated": "2026-11-09T23:00:19Z",
   "season": "2026-27",
   "source": "tenure_baseline_2025-26.json + nba-player-data rs-season-2027.csv (team of latest game)",
   "players": {
@@ -142,13 +142,6 @@
       "player_id": null,
       "joined_season": "2026-27",
       "continuous_seasons": 1
-    },
-    "Nic Claxton": {
-      "team": "BKN",
-      "team_id": 1610612751,
-      "player_id": 1629651,
-      "joined_season": "2019-20",
-      "continuous_seasons": 7
     },
     "Day'Ron Sharpe": {
       "team": "BKN",
@@ -673,6 +666,13 @@
       "team_id": 1610612741,
       "player_id": 1630644,
       "joined_season": "2025-26",
+      "continuous_seasons": 1
+    },
+    "Nic Claxton": {
+      "team": "CHI",
+      "team_id": 1610612741,
+      "player_id": 1629651,
+      "joined_season": "2026-27",
       "continuous_seasons": 1
     },
     "Norman Powell": {
@@ -2418,6 +2418,13 @@
       "joined_season": "2024-25",
       "continuous_seasons": 2
     },
+    "Rocco Zikarsky": {
+      "team": "MIN",
+      "team_id": 1610612750,
+      "player_id": 1642911,
+      "joined_season": "2025-26",
+      "continuous_seasons": 2
+    },
     "Cody Williams": {
       "team": "MIN",
       "team_id": 1610612750,
@@ -2465,13 +2472,6 @@
       "team_id": 1610612750,
       "player_id": 1630163,
       "joined_season": "2026-27",
-      "continuous_seasons": 1
-    },
-    "Rocco Zikarsky": {
-      "team": "MIN",
-      "team_id": 1610612750,
-      "player_id": 1642911,
-      "joined_season": "2025-26",
       "continuous_seasons": 1
     },
     "Trey Lyles": {
@@ -4106,5 +4106,5 @@
       "continuous_seasons": 1
     }
   },
-  "inputs_sha256": "266b4df335adc5c33950c1ad10a167fe275aa8e412ec2e63bc6679384e7e8e14"
+  "inputs_sha256": "562dd03337118b8ee7929c302ff36597286c589df9121a1b250406237f9a80a5"
 }
