@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-09T23:00:19Z",
+  "updated": "2026-11-10T20:29:03Z",
   "season": "2026-27",
   "source": "tenure_baseline_2025-26.json + nba-player-data rs-season-2027.csv (team of latest game)",
   "players": {
@@ -3818,6 +3818,13 @@
       "joined_season": "2026-27",
       "continuous_seasons": 1
     },
+    "Malachi Smith": {
+      "team": "TOR",
+      "team_id": 1610612761,
+      "player_id": null,
+      "joined_season": "2026-27",
+      "continuous_seasons": 1
+    },
     "Lauri Markkanen": {
       "team": "UTA",
       "team_id": 1610612762,
@@ -4106,5 +4113,5 @@
       "continuous_seasons": 1
     }
   },
-  "inputs_sha256": "562dd03337118b8ee7929c302ff36597286c589df9121a1b250406237f9a80a5"
+  "inputs_sha256": "165f4a5dd0134d597e25808ec1e7728c07f35ad02d82e53589c957b3e70caaf8"
 }
