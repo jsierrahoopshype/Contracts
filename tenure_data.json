@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-10T20:29:03Z",
+  "updated": "2026-11-11T20:14:10Z",
   "season": "2026-27",
   "source": "tenure_baseline_2025-26.json + nba-player-data rs-season-2027.csv (team of latest game)",
   "players": {
@@ -2887,6 +2887,13 @@
       "joined_season": "2025-26",
       "continuous_seasons": 1
     },
+    "Nique Clifford": {
+      "team": "OKC",
+      "team_id": 1610612760,
+      "player_id": 1642363,
+      "joined_season": "2026-27",
+      "continuous_seasons": 1
+    },
     "Thomas Sorber": {
       "team": "OKC",
       "team_id": 1610612760,
@@ -3472,13 +3479,6 @@
       "team": "SAC",
       "team_id": 1610612758,
       "player_id": 1642928,
-      "joined_season": "2025-26",
-      "continuous_seasons": 2
-    },
-    "Nique Clifford": {
-      "team": "SAC",
-      "team_id": 1610612758,
-      "player_id": 1642363,
       "joined_season": "2025-26",
       "continuous_seasons": 2
     },
@@ -4113,5 +4113,5 @@
       "continuous_seasons": 1
     }
   },
-  "inputs_sha256": "165f4a5dd0134d597e25808ec1e7728c07f35ad02d82e53589c957b3e70caaf8"
+  "inputs_sha256": "b2dd12d47291531c5324d13b5d804fbac15d9d7a9c8c7cd3a9c048ebff33866f"
 }
