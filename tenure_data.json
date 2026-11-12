@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-11T20:14:10Z",
+  "updated": "2026-11-12T20:52:42Z",
   "season": "2026-27",
   "source": "tenure_baseline_2025-26.json + nba-player-data rs-season-2027.csv (team of latest game)",
   "players": {
@@ -2243,6 +2243,13 @@
       "joined_season": "2024-25",
       "continuous_seasons": 3
     },
+    "Pete Nance": {
+      "team": "MIL",
+      "team_id": 1610612749,
+      "player_id": 1631250,
+      "joined_season": "2024-25",
+      "continuous_seasons": 3
+    },
     "Kevin Porter Jr.": {
       "team": "MIL",
       "team_id": 1610612749,
@@ -2262,13 +2269,6 @@
       "team_id": 1610612749,
       "player_id": 1631172,
       "joined_season": "2025-26",
-      "continuous_seasons": 2
-    },
-    "Pete Nance": {
-      "team": "MIL",
-      "team_id": 1610612749,
-      "player_id": 1631250,
-      "joined_season": "2024-25",
       "continuous_seasons": 2
     },
     "Alex Antetokounmpo": {
@@ -2591,6 +2591,13 @@
       "team_id": 1610612740,
       "player_id": 1630621,
       "joined_season": "2025-26",
+      "continuous_seasons": 1
+    },
+    "Jaron Pierre Jr.": {
+      "team": "NOP",
+      "team_id": 1610612740,
+      "player_id": null,
+      "joined_season": "2026-27",
       "continuous_seasons": 1
     },
     "Julian Reese": {
@@ -4113,5 +4120,5 @@
       "continuous_seasons": 1
     }
   },
-  "inputs_sha256": "b2dd12d47291531c5324d13b5d804fbac15d9d7a9c8c7cd3a9c048ebff33866f"
+  "inputs_sha256": "ef6f8c3c78723db9e469f11338deddee33707485733fc76f7147baaeed8f0830"
 }
