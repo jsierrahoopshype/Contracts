@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-12T20:52:42Z",
+  "updated": "2026-11-13T20:30:32Z",
   "season": "2026-27",
   "source": "tenure_baseline_2025-26.json + nba-player-data rs-season-2027.csv (team of latest game)",
   "players": {
@@ -414,7 +414,7 @@
       "team_id": 1610612766,
       "player_id": 1629684,
       "joined_season": "2023-24",
-      "continuous_seasons": 3
+      "continuous_seasons": 4
     },
     "Moussa Diabat\u00e9": {
       "team": "CHA",
@@ -4120,5 +4120,5 @@
       "continuous_seasons": 1
     }
   },
-  "inputs_sha256": "ef6f8c3c78723db9e469f11338deddee33707485733fc76f7147baaeed8f0830"
+  "inputs_sha256": "7ee98f13f3c6dc582f80566b576d1b7f3ed6b047d70d8a0938d77a399974ebae"
 }
