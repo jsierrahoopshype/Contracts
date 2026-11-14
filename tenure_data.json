@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-13T20:30:32Z",
+  "updated": "2026-11-14T18:45:23Z",
   "season": "2026-27",
   "source": "tenure_baseline_2025-26.json + nba-player-data rs-season-2027.csv (team of latest game)",
   "players": {
@@ -2607,6 +2607,13 @@
       "joined_season": "2026-27",
       "continuous_seasons": 1
     },
+    "Malik Dia": {
+      "team": "NOP",
+      "team_id": 1610612740,
+      "player_id": null,
+      "joined_season": "2026-27",
+      "continuous_seasons": 1
+    },
     "Trendon Watford": {
       "team": "NOP",
       "team_id": 1610612740,
@@ -2845,6 +2852,13 @@
       "joined_season": "2025-26",
       "continuous_seasons": 2
     },
+    "Nikola Topi\u0107": {
+      "team": "OKC",
+      "team_id": 1610612760,
+      "player_id": 1642260,
+      "joined_season": "2025-26",
+      "continuous_seasons": 2
+    },
     "Aday Mara": {
       "team": "OKC",
       "team_id": 1610612760,
@@ -2885,13 +2899,6 @@
       "team_id": 1610612760,
       "player_id": 1642877,
       "joined_season": "2026-27",
-      "continuous_seasons": 1
-    },
-    "Nikola Topi\u0107": {
-      "team": "OKC",
-      "team_id": 1610612760,
-      "player_id": 1642260,
-      "joined_season": "2025-26",
       "continuous_seasons": 1
     },
     "Nique Clifford": {
@@ -4120,5 +4127,5 @@
       "continuous_seasons": 1
     }
   },
-  "inputs_sha256": "7ee98f13f3c6dc582f80566b576d1b7f3ed6b047d70d8a0938d77a399974ebae"
+  "inputs_sha256": "a640abb12ef2e9b2177109723e22d808be59ecf33ce55566c1790878652f93da"
 }
