@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-14T18:45:23Z",
+  "updated": "2026-11-19T21:38:38Z",
   "season": "2026-27",
   "source": "tenure_baseline_2025-26.json + nba-player-data rs-season-2027.csv (team of latest game)",
   "players": {
@@ -364,6 +364,13 @@
       "team": "BOS",
       "team_id": 1610612738,
       "player_id": null,
+      "joined_season": "2026-27",
+      "continuous_seasons": 1
+    },
+    "Devin Carter": {
+      "team": "BOS",
+      "team_id": 1610612738,
+      "player_id": 1642269,
       "joined_season": "2026-27",
       "continuous_seasons": 1
     },
@@ -1200,13 +1207,6 @@
       "joined_season": "2024-25",
       "continuous_seasons": 2
     },
-    "Caris LeVert": {
-      "team": "DET",
-      "team_id": 1610612765,
-      "player_id": 1627747,
-      "joined_season": "2025-26",
-      "continuous_seasons": 1
-    },
     "Ebuka Okorie": {
       "team": "DET",
       "team_id": 1610612765,
@@ -1858,6 +1858,13 @@
       "joined_season": "2026-27",
       "continuous_seasons": 1
     },
+    "Carson Cooper": {
+      "team": "LAL",
+      "team_id": 1610612747,
+      "player_id": null,
+      "joined_season": "2026-27",
+      "continuous_seasons": 1
+    },
     "Collin Sexton": {
       "team": "LAL",
       "team_id": 1610612747,
@@ -2033,13 +2040,6 @@
       "joined_season": "2026-27",
       "continuous_seasons": 1
     },
-    "Carson Cooper": {
-      "team": "MEM",
-      "team_id": 1610612763,
-      "player_id": null,
-      "joined_season": "2026-27",
-      "continuous_seasons": 1
-    },
     "Isaiah Stewart": {
       "team": "MEM",
       "team_id": 1610612763,
@@ -2110,6 +2110,13 @@
       "joined_season": "2024-25",
       "continuous_seasons": 3
     },
+    "Keshad Johnson": {
+      "team": "MIA",
+      "team_id": 1610612748,
+      "player_id": 1642352,
+      "joined_season": "2024-25",
+      "continuous_seasons": 3
+    },
     "Pelle Larsson": {
       "team": "MIA",
       "team_id": 1610612748,
@@ -2123,13 +2130,6 @@
       "player_id": 1626179,
       "joined_season": "2023-24",
       "continuous_seasons": 3
-    },
-    "Keshad Johnson": {
-      "team": "MIA",
-      "team_id": 1610612748,
-      "player_id": 1642352,
-      "joined_season": "2024-25",
-      "continuous_seasons": 2
     },
     "Myron Gardner": {
       "team": "MIA",
@@ -2191,6 +2191,13 @@
       "team": "MIA",
       "team_id": 1610612748,
       "player_id": 203501,
+      "joined_season": "2026-27",
+      "continuous_seasons": 1
+    },
+    "Tre Donaldson": {
+      "team": "MIA",
+      "team_id": 1610612748,
+      "player_id": null,
       "joined_season": "2026-27",
       "continuous_seasons": 1
     },
@@ -2297,6 +2304,13 @@
       "team_id": 1610612749,
       "player_id": 1630560,
       "joined_season": "2025-26",
+      "continuous_seasons": 1
+    },
+    "Caris LeVert": {
+      "team": "MIL",
+      "team_id": 1610612749,
+      "player_id": 1627747,
+      "joined_season": "2026-27",
       "continuous_seasons": 1
     },
     "Gary Harris": {
@@ -3475,13 +3489,6 @@
       "joined_season": "2025-26",
       "continuous_seasons": 2
     },
-    "Devin Carter": {
-      "team": "SAC",
-      "team_id": 1610612758,
-      "player_id": 1642269,
-      "joined_season": "2024-25",
-      "continuous_seasons": 2
-    },
     "Doug McDermott": {
       "team": "SAC",
       "team_id": 1610612758,
@@ -3546,6 +3553,13 @@
       "continuous_seasons": 1
     },
     "Leaky Black": {
+      "team": "SAC",
+      "team_id": 1610612758,
+      "player_id": null,
+      "joined_season": "2026-27",
+      "continuous_seasons": 1
+    },
+    "Mason Plumlee": {
       "team": "SAC",
       "team_id": 1610612758,
       "player_id": null,
@@ -4127,5 +4141,5 @@
       "continuous_seasons": 1
     }
   },
-  "inputs_sha256": "a640abb12ef2e9b2177109723e22d808be59ecf33ce55566c1790878652f93da"
+  "inputs_sha256": "b0f2e4b9e5c2eeeff6e96dc7afb939c6116007e25f8998f09ded95f0349351c1"
 }
