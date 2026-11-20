@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-19T21:38:38Z",
+  "updated": "2026-11-20T21:11:54Z",
   "season": "2026-27",
   "source": "tenure_baseline_2025-26.json + nba-player-data rs-season-2027.csv (team of latest game)",
   "players": {
@@ -1718,6 +1718,13 @@
       "joined_season": "2024-25",
       "continuous_seasons": 2
     },
+    "Yanic Konan Niederh\u00e4user": {
+      "team": "LAC",
+      "team_id": 1610612746,
+      "player_id": 1642949,
+      "joined_season": "2025-26",
+      "continuous_seasons": 2
+    },
     "Baba Miller": {
       "team": "LAC",
       "team_id": 1610612746,
@@ -1785,13 +1792,6 @@
       "team": "LAC",
       "team_id": 1610612746,
       "player_id": 1631102,
-      "joined_season": "2025-26",
-      "continuous_seasons": 1
-    },
-    "Yanic Konan Niederh\u00e4user": {
-      "team": "LAC",
-      "team_id": 1610612746,
-      "player_id": 1642949,
       "joined_season": "2025-26",
       "continuous_seasons": 1
     },
@@ -4141,5 +4141,5 @@
       "continuous_seasons": 1
     }
   },
-  "inputs_sha256": "b0f2e4b9e5c2eeeff6e96dc7afb939c6116007e25f8998f09ded95f0349351c1"
+  "inputs_sha256": "8187679a101700fcb01e9ed198066db86a2aaa8f52fc6248c33ed4cdf3276882"
 }
