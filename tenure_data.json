@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-21T20:08:16Z",
+  "updated": "2026-11-22T20:23:14Z",
   "season": "2026-27",
   "source": "tenure_baseline_2025-26.json + nba-player-data rs-season-2027.csv (team of latest game)",
   "players": {
@@ -3083,6 +3083,13 @@
       "joined_season": "2023-24",
       "continuous_seasons": 3
     },
+    "Dominick Barlow": {
+      "team": "PHI",
+      "team_id": 1610612755,
+      "player_id": 1631230,
+      "joined_season": "2025-26",
+      "continuous_seasons": 2
+    },
     "Jabari Walker": {
       "team": "PHI",
       "team_id": 1610612755,
@@ -3116,13 +3123,6 @@
       "team_id": 1610612755,
       "player_id": 1629731,
       "joined_season": "2026-27",
-      "continuous_seasons": 1
-    },
-    "Dominick Barlow": {
-      "team": "PHI",
-      "team_id": 1610612755,
-      "player_id": 1631230,
-      "joined_season": "2025-26",
       "continuous_seasons": 1
     },
     "Jaylen Brown": {
@@ -4141,5 +4141,5 @@
       "continuous_seasons": 1
     }
   },
-  "inputs_sha256": "9ae6552258375bc984ecb8d87b147f750c0ad6e9873c0f3b770d35e989695cd3"
+  "inputs_sha256": "327d13b36c0b2c6a9e7a798e4ce5799132defb9c27146269319749c71b6b5d32"
 }
