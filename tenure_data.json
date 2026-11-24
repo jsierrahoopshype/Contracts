@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-24T00:57:36Z",
+  "updated": "2026-11-24T23:03:33Z",
   "season": "2026-27",
   "source": "tenure_baseline_2025-26.json + nba-player-data rs-season-2027.csv (team of latest game)",
   "players": {
@@ -106,13 +106,6 @@
       "team_id": 1610612737,
       "player_id": 1627827,
       "joined_season": "2026-27",
-      "continuous_seasons": 1
-    },
-    "Gabe Vincent": {
-      "team": "ATL",
-      "team_id": 1610612737,
-      "player_id": 1629216,
-      "joined_season": "2025-26",
       "continuous_seasons": 1
     },
     "Kingston Flemings": {
@@ -239,6 +232,13 @@
       "team_id": 1610612751,
       "player_id": 1630604,
       "joined_season": "2025-26",
+      "continuous_seasons": 1
+    },
+    "Grant Nelson": {
+      "team": "BKN",
+      "team_id": 1610612751,
+      "player_id": null,
+      "joined_season": "2026-27",
       "continuous_seasons": 1
     },
     "Joshua Jefferson": {
@@ -1746,6 +1746,13 @@
       "joined_season": "2025-26",
       "continuous_seasons": 1
     },
+    "Brandon Ingram": {
+      "team": "LAC",
+      "team_id": 1610612746,
+      "player_id": 1627742,
+      "joined_season": "2026-27",
+      "continuous_seasons": 1
+    },
     "Gradey Dick": {
       "team": "LAC",
       "team_id": 1610612746,
@@ -1891,13 +1898,6 @@
       "team_id": 1610612747,
       "player_id": 1626172,
       "joined_season": "2026-27",
-      "continuous_seasons": 1
-    },
-    "Kobe Bufkin": {
-      "team": "LAL",
-      "team_id": 1610612747,
-      "player_id": 1641723,
-      "joined_season": "2025-26",
       "continuous_seasons": 1
     },
     "Lawson Lovering": {
@@ -2457,6 +2457,13 @@
       "team": "MIN",
       "team_id": 1610612750,
       "player_id": null,
+      "joined_season": "2026-27",
+      "continuous_seasons": 1
+    },
+    "Johni Broome": {
+      "team": "MIN",
+      "team_id": 1610612750,
+      "player_id": 1641780,
       "joined_season": "2026-27",
       "continuous_seasons": 1
     },
@@ -3132,13 +3139,6 @@
       "joined_season": "2026-27",
       "continuous_seasons": 1
     },
-    "Johni Broome": {
-      "team": "PHI",
-      "team_id": 1610612755,
-      "player_id": 1641780,
-      "joined_season": "2025-26",
-      "continuous_seasons": 1
-    },
     "Kentavious Caldwell-Pope": {
       "team": "PHI",
       "team_id": 1610612755,
@@ -3538,6 +3538,13 @@
       "joined_season": "2026-27",
       "continuous_seasons": 1
     },
+    "Gabe Vincent": {
+      "team": "SAC",
+      "team_id": 1610612758,
+      "player_id": 1629216,
+      "joined_season": "2026-27",
+      "continuous_seasons": 1
+    },
     "Isaiah Stevens": {
       "team": "SAC",
       "team_id": 1610612758,
@@ -3664,13 +3671,6 @@
       "joined_season": "2025-26",
       "continuous_seasons": 2
     },
-    "Harrison Ingram": {
-      "team": "SAS",
-      "team_id": 1610612759,
-      "player_id": 1631127,
-      "joined_season": "2024-25",
-      "continuous_seasons": 2
-    },
     "Luke Kornet": {
       "team": "SAS",
       "team_id": 1610612759,
@@ -3788,13 +3788,6 @@
       "team_id": 1610612761,
       "player_id": 1642918,
       "joined_season": "2025-26",
-      "continuous_seasons": 2
-    },
-    "Brandon Ingram": {
-      "team": "TOR",
-      "team_id": 1610612761,
-      "player_id": 1627742,
-      "joined_season": "2024-25",
       "continuous_seasons": 2
     },
     "Collin Murray-Boyles": {
@@ -3923,6 +3916,13 @@
       "joined_season": "2026-27",
       "continuous_seasons": 1
     },
+    "Harrison Ingram": {
+      "team": "UTA",
+      "team_id": 1610612762,
+      "player_id": 1631127,
+      "joined_season": "2026-27",
+      "continuous_seasons": 1
+    },
     "Jaxson Hayes": {
       "team": "UTA",
       "team_id": 1610612762,
@@ -3935,6 +3935,13 @@
       "team_id": 1610612762,
       "player_id": 1629723,
       "joined_season": "2025-26",
+      "continuous_seasons": 1
+    },
+    "Jonas Aidoo": {
+      "team": "UTA",
+      "team_id": 1610612762,
+      "player_id": null,
+      "joined_season": "2026-27",
       "continuous_seasons": 1
     },
     "Josh Green": {
@@ -3963,6 +3970,13 @@
       "team_id": 1610612762,
       "player_id": 201567,
       "joined_season": "2025-26",
+      "continuous_seasons": 1
+    },
+    "Kobe Bufkin": {
+      "team": "UTA",
+      "team_id": 1610612762,
+      "player_id": 1641723,
+      "joined_season": "2026-27",
       "continuous_seasons": 1
     },
     "Mo Bamba": {
@@ -4141,5 +4155,5 @@
       "continuous_seasons": 1
     }
   },
-  "inputs_sha256": "02987dd701ad6629d700d2c17f9cc0ac84dbc44839f59bf8e37ccc18b020c151"
+  "inputs_sha256": "cb1ae3f71c5f78176f024f1664cc34411d851953deb8008b103f87850bdd900c"
 }
