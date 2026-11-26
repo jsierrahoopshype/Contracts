@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-25T22:36:36Z",
+  "updated": "2026-11-26T22:23:57Z",
   "season": "2026-27",
   "source": "tenure_baseline_2025-26.json + nba-player-data rs-season-2027.csv (team of latest game)",
   "players": {
@@ -2796,6 +2796,13 @@
       "joined_season": "2025-26",
       "continuous_seasons": 1
     },
+    "Tyler Nickel": {
+      "team": "NYK",
+      "team_id": 1610612752,
+      "player_id": null,
+      "joined_season": "2026-27",
+      "continuous_seasons": 1
+    },
     "Shai Gilgeous-Alexander": {
       "team": "OKC",
       "team_id": 1610612760,
@@ -4155,5 +4162,5 @@
       "continuous_seasons": 1
     }
   },
-  "inputs_sha256": "cb9c514ba6f85a7e7084759b3489e94fa43ff6b8278a07b2b5f5fb6aae9778b5"
+  "inputs_sha256": "8e6d06d1756f6359434ed7bf051c1b3b131938fc483ddf6b7c9b38e138857b92"
 }
